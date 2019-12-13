@@ -73,7 +73,14 @@
         name: "Navbar",
         data () {
             return {
-                state: "close"
+                state: "close",
+                items: [{
+                    index: 1,
+                    title: 'New Post'
+                }, {
+                    index: 2,
+                    title: 'Feedback Form'
+                }]
             }
         },
         computed: {

@@ -46,12 +46,17 @@
         min-height: 400px;
     }
     .search {
+        position: relative;
         color: #777;
         opacity: 0.6;
         background-color: #ffffff;
         filter: alpha(opacity=60);
+        border-radius: 30px; 
         text-align:center;
         min-height: 50px;
+        min-width: 500px;
+        margin: 14vw 55vh;
+        outline: none;
     }
     .paragraph {
         color: #777;
@@ -65,4 +70,5 @@
         font-size: 30px;
         font-weight: bold;
     }
+    
 </style>
