@@ -13,13 +13,16 @@
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+        This is the brain child of all the members of Helping Hand made during the CodieCon conducted at Coviam Technologies during 13 -16 December, 2019. We reserve all rights to abstain anyone from using
+        the product as we want to do it.
+        <br>#1026, HSR Layout, Sector-5, 22nd Main, Bengaluru - 560022 <br>
       </v-card-text>
 
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        {{ new Date().getFullYear() }} — <strong>HelpingHand @ copyright All rights reserved</strong>
       </v-card-text>
     </v-card>
   </v-footer>
@@ -41,13 +44,4 @@ export default {
 </script>
 
 <style scoped>
-.main {
-    background-color: black;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    border: black 2px solid;
-    width: 100%;
-    color: floralwhite;
-}
 </style>
