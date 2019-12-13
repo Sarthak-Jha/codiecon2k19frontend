@@ -3,7 +3,9 @@
     <div class="head">
       <navbar></navbar>
     </div>
-    <landing-page></landing-page>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <div class="footer">
       <v-content>
       <foot></foot>
@@ -16,14 +18,12 @@
 import HelloWorld from './components/HelloWorld';
 import Navbar from './components/Navbar';
 import Foot from './components/Footer';
-import LandingPage from './components/LandingPage';
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Foot,
-    LandingPage
+    Foot
   },
 
   data: () => ({
@@ -39,6 +39,8 @@ export default {
 }
 .head {
     width: 100%;
+    position: fixed;
+    z-index: 5;
     align-self: flex-start;
 }
 .footer {

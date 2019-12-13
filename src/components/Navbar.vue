@@ -42,16 +42,16 @@
                         class="nav__content__text"
                 >
                     <template v-slot:activator="{ on }">
-                        <v-btn
+                        <v-btn text
                                 v-on="on"
                         >
-                            <v-avatar color="indigo" class="nav__content__login">
+                            <v-avatar color="#1E88E5" class="nav__content__login">
                                 <v-icon dark>mdi-account-circle</v-icon>
                             </v-avatar>
                         </v-btn>
                     </template>
 
-                    <v-list>
+                    <v-list class="user_list">
                         <v-list-item>Login</v-list-item>
                         <v-list-item>Signup</v-list-item>
                     </v-list>
@@ -86,5 +86,10 @@
     }
     .v-toolbar__items{
         align-items: center;
+    }
+    .user_list {
+        min-width: 150px;
+        text-align: center;
+
     }
 </style>

@@ -2,14 +2,31 @@
   <v-footer dark padless>
     <v-card flat tile class="indigo lighten-1 white--text text-center">
       <v-card-text>
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4 white--text"
-          icon
-        >
-          <v-icon size="24px">{{ icon }}</v-icon>
-        </v-btn>
+        <a href="https://www.facebook.com" target="blank">
+          <v-btn class="mx-4 white--text" icon>
+            <img class="icons" src='../assets/svg/021-facebook.svg'>
+          </v-btn>
+        </a>
+        <a href="https://www.telegram.com" target="blank">
+          <v-btn class="mx-4 white--text" icon>
+            <img class="icons" src='../assets/svg/029-telegram.svg'>
+          </v-btn>
+        </a>
+        <a href="https://www.skype.com" target="blank">
+          <v-btn class="mx-4 white--text" icon>
+            <img class="icons" src='../assets/svg/013-skype.svg'>
+          </v-btn>
+        </a>
+        <a href="https://www.whatsapp.com" target="blank">
+          <v-btn class="mx-4 white--text" icon>
+            <img class="icons" src='../assets/svg/035-whatsapp.svg'>
+          </v-btn>
+        </a>
+        <a href="https://www.linkedin.com" target="blank">
+          <v-btn class="mx-4 white--text" icon>
+            <img class="icons" src='../assets/svg/045-linkedin.svg'>
+          </v-btn>
+        </a>
       </v-card-text>
 
       <v-card-text class="white--text pt-0">
@@ -32,16 +49,14 @@
 export default {
   name: 'Footer',
   data: () => ({
-  icons: [
-    'fab fa-facebook',
-    'fab fa-twitter',
-    'fab fa-google-plus',
-    'fab fa-linkedin',
-    'fab fa-instagram',
-    ],
+
   }),
 }
 </script>
 
 <style scoped>
+.icons {
+  max-width: 22px;
+  max-height: 22px;
+}
 </style>
