@@ -3,9 +3,7 @@
     <div class="head">
       <navbar></navbar>
     </div>
-    <div>
-      My name is aloha
-    </div>
+    <landing-page></landing-page>
     <div class="footer">
       <v-content>
       <foot></foot>
@@ -18,12 +16,14 @@
 import HelloWorld from './components/HelloWorld';
 import Navbar from './components/Navbar';
 import Foot from './components/Footer';
+import LandingPage from './components/LandingPage';
 
 export default {
   name: 'App',
   components: {
     Navbar,
-    Foot
+    Foot,
+    LandingPage
   },
 
   data: () => ({
