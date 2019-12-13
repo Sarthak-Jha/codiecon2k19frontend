@@ -22,7 +22,7 @@
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-card-text>
     </v-card>
-  </v-footer> 
+  </v-footer>
 </template>
 
 <script>
