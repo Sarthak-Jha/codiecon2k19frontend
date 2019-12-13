@@ -1,24 +1,29 @@
 <template>
-  <v-app>
-    <navbar></navbar>
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-    <footer></footer>
+  <v-app class="main">
+    <div class="head">
+      <navbar></navbar>
+    </div>
+    <div>
+      My name is aloha
+    </div>
+    <div class="footer">
+      <v-content>
+      <foot></foot>
+      </v-content>
+    </div>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'
+import Foot from './components/Footer';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     Navbar,
-    Footer
+    Foot
   },
 
   data: () => ({
@@ -26,3 +31,18 @@ export default {
   }),
 };
 </script>
+
+<style scoped>
+.main {
+    display: flex;
+    flex-flow: row wrap;
+}
+.head {
+    width: 100%;
+    align-self: flex-start;
+}
+.footer {
+    width: 100%;
+    align-self: flex-end;
+}
+</style>
