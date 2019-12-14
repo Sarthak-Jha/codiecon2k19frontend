@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../pages/LandingPage.vue'
+import Profile from '../pages/Profile.vue'
 
 Vue.use(VueRouter)
 
@@ -14,6 +15,11 @@ const routes = [
     path: '/createpost',
     name: 'createpost',
     component: () => import(/* webpackChunkName: "post" */ '../pages/CreatePost.vue')
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
   }
 ]
 
