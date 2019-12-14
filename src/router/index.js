@@ -9,6 +9,7 @@ import Groups from '../pages/Groups'
 import feedback from '../pages/FeedbackForm'
 import groupForm from '../pages/GroupForm'
 import postDetails from '../pages/PostDetails'
+import Postform from "../pages/Postform";
 
 Vue.use(VueRouter)
 
@@ -21,7 +22,7 @@ const routes = [
   {
     path: '/createpost',
     name: 'createpost',
-    component: () => import(/* webpackChunkName: "post" */ '../pages/CreatePost.vue')
+    component: () => import(/* webpackChunkName: "post" */ '../pages/Postform.vue')
   },
   {
     path: '/profile',
@@ -62,6 +63,11 @@ const routes = [
     path: '/postdetails',
     name: 'postDetails',
     component: postDetails
+  },
+  {
+    path: '/postform',
+    name: '/postform',
+    component: Postform
   }
 ]
 
