@@ -3,7 +3,7 @@
         <v-toolbar
                 class="nav"
         >
-            <v-toolbar-title class="nav__tittle">HelpingHand</v-toolbar-title>
+            <v-toolbar-title class="nav__tittle"><router-link class="link" to="/">HelpingHand</router-link></v-toolbar-title>
 
             <v-spacer></v-spacer>
 
@@ -15,7 +15,7 @@
             </form>
 
             <v-toolbar-items class="nav__content">
-                <v-btn text class="nav__content__text">Newsfeeds</v-btn>
+                <v-btn text class="nav__content__text"><router-link class="link" to="/newsfeeds">Newsfeeds</router-link></v-btn>
                 <v-menu
                         bottom
                         origin="center center"
@@ -26,22 +26,18 @@
                         <v-btn
                                 text
                                 v-on="on"
-                        >
+                        ><a href="javascript:void(0)" class="link">
                             Forms
+                        </a>
                         </v-btn>
                     </template>
 
                     <v-list>
-                        <v-list-item
-                                v-for="(item, i) in items"
-                                :key="i"
-                                @click=""
-                        >
-                            <v-list-item-title>{{ item.title }}</v-list-item-title>
-                        </v-list-item>
+                        <v-list-item> <router-link class="link" to="/newsfeeds">New Post</router-link></v-list-item>
+                        <v-list-item><router-link class="link" to="/newsfeeds">Feedback Form</router-link></v-list-item>
                     </v-list>
                 </v-menu>
-                <v-btn text class="nav__content__text">Myfeeds</v-btn>
+                <v-btn text class="nav__content__text"><router-link class="link" to="/newsfeeds">Groups</router-link></v-btn>
                 <v-menu
                         bottom
                         origin="center center"
@@ -59,8 +55,8 @@
                     </template>
 
                     <v-list class="user_list">
-                        <v-list-item>Login</v-list-item>
-                        <v-list-item>Signup</v-list-item>
+                        <v-list-item><router-link class="link" to="/login">Login</router-link></v-list-item>
+                        <v-list-item><router-link class="link" to="/register">Signup</router-link></v-list-item>
                     </v-list>
                 </v-menu>
             </v-toolbar-items>
@@ -74,13 +70,6 @@
         data () {
             return {
                 state: "close",
-                items: [{
-                    index: 1,
-                    title: 'New Post'
-                }, {
-                    index: 2,
-                    title: 'Feedback Form'
-                }]
             }
         },
         computed: {
@@ -124,6 +113,9 @@
     #usericon {
         box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         
+    }
+    .link {
+        text-decoration: none;
     }
 
     #app {

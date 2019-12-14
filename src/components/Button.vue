@@ -12,12 +12,22 @@ export default {
             type: String,
             required: true
         }
+    },
+    data () {
+        return {
+
+        }
+    },
+    methods: {
+        clickitem (id) {
+            this.$emit('clicked',id)
+        }
     }
 
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .button {
     min-width: 50px;
     min-height: 100px;

@@ -32,7 +32,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .main {
     display: flex;
     flex-flow: row wrap;

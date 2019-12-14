@@ -2,17 +2,17 @@
     <v-timeline-item large>
         <template v-slot:icon>
             <v-avatar>
-            <img :src="timelinedata.img">
+            <img :src="imageArr.imageArr[index]" class="iconimg">
             </v-avatar>
         </template>
         <template v-if="alignment" v-slot:opposite>
-            <v-card class="elevation-2" @click="selectedOption(timelinedata.heading)">
+            <v-card class="elevation-2">
                 <v-card-title class="headline">{{timelinedata.heading}}</v-card-title>
                 <v-card-text style="text-align: left;">{{timelinedata.desc}}</v-card-text>
             </v-card>
         </template>
         <template v-if="!alignment">
-            <v-card class="elevation-2" @click="selectedOption(timelinedata.heading)">
+            <v-card class="elevation-2">
                 <v-card-title class="headline">{{timelinedata.heading}}</v-card-title>
                 <v-card-text>{{timelinedata.desc}}</v-card-text>
             </v-card>
@@ -22,8 +22,15 @@
 </template>
 
 <script>
+import imageArr from '@/assets/categoryicon/icons'
 export default {
     name: 'timelineitem',
+    data () {
+        return {
+            imageArr: [],
+            index: 0
+        }
+    },
     props: {
         timelinedata: {
             type: Object,
@@ -39,17 +46,17 @@ export default {
             return false
         }
     },
-    methods: {
-        selectedOption (id) {
-            // console.log('id', id)
-            this.$emit('categorychoosen', id)
-        }
+    created () {
+        this.imageArr = imageArr
+        this.index = this.timelinedata.index
     }
 }
 </script>
 
-<style>
-.leftheading {
-    text-align: left;
+<style lang="scss" scoped>
+.iconimg {
+    object-fit: cover;
+    width: 35px;
+    height: 35px;
 }
 </style>
