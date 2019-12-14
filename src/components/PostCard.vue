@@ -8,8 +8,8 @@
                 <v-img :src="postData.posterProfilePictureLink"></v-img>
             </v-list-item-avatar>
                 <v-list-item-content>
-                    <v-list-item-title class="headline">{{postData.title}}</v-list-item-title>
-                    <v-list-item-subtitle>by {{postData.postedBy}}</v-list-item-subtitle>
+                    <v-list-item-title class="headline">aloha</v-list-item-title>
+                    <v-list-item-subtitle>by chahi</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
 
@@ -19,7 +19,7 @@
             ></v-img>
 
             <v-card-text>
-                {{postData.likecounts}}
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa rem ea unde laborum maiores natus. Praesentium velit soluta nemo fugiat. Quis enim odio nobis? Obcaecati temporibus nihil accusamus beatae tenetur.
             </v-card-text>
 
         <v-card-actions>
