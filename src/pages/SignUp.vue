@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app{
     padding-top: 0px;
 }

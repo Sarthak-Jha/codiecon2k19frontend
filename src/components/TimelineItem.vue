@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .iconimg {
     object-fit: cover;
     width: 35px;

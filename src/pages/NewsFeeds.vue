@@ -1,13 +1,29 @@
 <template>
-    
+    <div class="main">
+        <section class="section-left">
+            <search-filters></search-filters>
+        </section>
+        <section class="section-right">
+            <div v-for="post in posts" :key="post.postId">
+                <post-card></post-card>
+            </div>
+        </section>
+    </div>
 </template>
 
 <script>
+import postCard from '../components/PostCard'
+import searchFilters from '../components/SearchFilters'
+
 export default {
     name: 'newsfeeds',
+    components: {
+        postCard,
+        searchFilters
+    },
     data () {
         return {
-            post : {
+            posts : {
                 "postId": "0c52b8ed-c133-4361-93eb-4ff9146771f0",
                 "location": "string",
                 "title": "string",
@@ -35,6 +51,21 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.section {
+    align-self: center;
+    &-left {
+        flex-grow: 1;
 
+    }
+    &-right {
+        flex-grow: 3;
+    }
+}
 </style>

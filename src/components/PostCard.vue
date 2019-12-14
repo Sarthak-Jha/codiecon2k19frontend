@@ -45,7 +45,7 @@
 
 <script>
 export default {
-    name: 'postcard',
+    name: 'postCard',
     props: {
         postData: {
             type: Object,
@@ -56,6 +56,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>
