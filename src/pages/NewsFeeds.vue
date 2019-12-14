@@ -6,6 +6,13 @@
         <section class="section-right">
             <div class="section-right__sub">
                 <section class="pagination">
+                    <div class="text-center">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        circle
+                        ></v-pagination>
+                    </div>
                 </section>
                 <section class="cards">
                     <div class="cards__single" v-for="post in 10" :key="post">
@@ -13,6 +20,13 @@
                     </div>
                 </section>
                 <section class="pagination">
+                    <div class="text-center">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        circle
+                        ></v-pagination>
+                    </div>
                 </section>
             </div>
         </section>
@@ -31,6 +45,8 @@ export default {
     },
     data () {
         return {
+            page: 1,
+            totalPage: 10,
             posts : {
                 "postId": "0c52b8ed-c133-4361-93eb-4ff9146771f0",
                 "location": "string",
@@ -65,6 +81,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    margin-top: 90px;
 }
 .section {
     align-self: center;
@@ -77,7 +94,7 @@ export default {
         &__sub {
             display: flex;
             flex-direction: column;
-            
+
         }
     }
 }
@@ -85,8 +102,7 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 90px; 
+    justify-content: space-between; 
     &__single {
         margin: 10px 20px;
     }
