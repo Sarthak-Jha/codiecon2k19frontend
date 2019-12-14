@@ -4,8 +4,16 @@
             <search-filters></search-filters>
         </section>
         <section class="section-right">
-            <div v-for="post in posts" :key="post.postId">
-                <post-card></post-card>
+            <div class="section-right__sub">
+                <section class="pagination">
+                </section>
+                <section class="cards">
+                    <div class="cards__single" v-for="post in 10" :key="post">
+                        <post-card :postData="post"></post-card>
+                    </div>
+                </section>
+                <section class="pagination">
+                </section>
             </div>
         </section>
     </div>
@@ -65,7 +73,22 @@ export default {
 
     }
     &-right {
-        flex-grow: 3;
+        flex-grow: 2;
+        &__sub {
+            display: flex;
+            flex-direction: column;
+            
+        }
+    }
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 90px; 
+    &__single {
+        margin: 10px 20px;
     }
 }
 </style>
