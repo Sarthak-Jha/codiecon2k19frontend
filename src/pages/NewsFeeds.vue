@@ -78,7 +78,7 @@ export default {
 <style lang="scss" scoped>
 .main {
     display: flex;
-    flex-direction: row;
+    flex-direction: row ;
     justify-content: space-between;
     align-items: stretch;
     margin-top: 90px;
@@ -87,14 +87,13 @@ export default {
     align-self: center;
     &-left {
         flex-grow: 1;
-
     }
     &-right {
         flex-grow: 2;
+        max-width: 66%;
         &__sub {
             display: flex;
             flex-direction: column;
-
         }
     }
 }
@@ -102,9 +101,12 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between; 
+    justify-content: space-evenly; 
     &__single {
-        margin: 10px 20px;
+        margin: 10px 30px;
     }
+}
+.pagination {
+    margin: 10px 0px;
 }
 </style>
