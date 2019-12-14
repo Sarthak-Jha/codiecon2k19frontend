@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../pages/LandingPage.vue'
+import newsfeeds from '../pages/NewsFeeds'
+import loginpage from '../pages/LoginPage'
+import register from '../pages/SignUp'
 
 Vue.use(VueRouter)
 
@@ -14,6 +17,21 @@ const routes = [
     path: '/createpost',
     name: 'createpost',
     component: () => import(/* webpackChunkName: "post" */ '../pages/CreatePost.vue')
+  },
+  {
+    path: '/newsfeeds',
+    name: 'newsfeeds',
+    component: newsfeeds
+  },
+  {
+    path: '/login',
+    name: 'loginpage',
+    component: loginpage
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: register
   }
 ]
 
