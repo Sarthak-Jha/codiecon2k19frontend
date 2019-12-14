@@ -3,7 +3,7 @@
         <v-toolbar
                 class="nav"
         >
-            <v-toolbar-title class="nav__tittle">HelpingHand</v-toolbar-title>
+            <v-toolbar-title class="nav__tittle"><router-link class="link" to="/">HelpingHand</router-link></v-toolbar-title>
 
             <v-spacer></v-spacer>
 
