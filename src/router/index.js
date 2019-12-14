@@ -5,7 +5,10 @@ import Profile from '../pages/Profile.vue'
 import newsfeeds from '../pages/NewsFeeds'
 import loginpage from '../pages/LoginPage'
 import register from '../pages/SignUp'
-import Groups from "../pages/Groups";
+import Groups from '../pages/Groups'
+import feedback from '../pages/FeedbackForm'
+import groupForm from '../pages/GroupForm'
+import postDetails from '../pages/PostDetails'
 
 Vue.use(VueRouter)
 
@@ -44,6 +47,21 @@ const routes = [
     path: '/groups',
     name: 'groups',
     component: Groups
+  },
+  {
+    path: '/feedback',
+    name: 'feedbackForm',
+    component: feedback
+  },
+  {
+    path: '/groupform',
+    name: 'groupForm',
+    component: groupForm
+  },
+  {
+    path: '/postdetails',
+    name: 'postDetails',
+    component: postDetails
   }
 ]
 

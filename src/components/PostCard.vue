@@ -8,7 +8,9 @@
                 <v-img :src="postData.posterProfilePictureLink"></v-img>
             </v-list-item-avatar>
                 <v-list-item-content>
-                    <v-list-item-title class="headline">aloha</v-list-item-title>
+                    <v-list-item-title class="headline">
+                        <router-link class="link" to="/postdetails">aloha</router-link>
+                    </v-list-item-title>
                     <v-list-item-subtitle>by chahi</v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -57,5 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+    .link {
+        text-decoration: none;
+    }
 </style>
