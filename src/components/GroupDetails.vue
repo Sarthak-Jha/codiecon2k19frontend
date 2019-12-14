@@ -51,7 +51,7 @@
             </v-expansion-panels>
         </v-row>
         <div class="createGroup">
-            <v-btn class="createGroup__btn">Create Group</v-btn>
+            <v-btn class="createGroup__btn"><router-link class="link" to="/groupform">Create Group</router-link></v-btn>
         </div>
     </div>
 </template>
@@ -106,6 +106,9 @@
         &__btn{
             margin: 15px;
             width: fit-content;
-         }
+        }
+    }
+    .link {
+        text-decoration: none;
     }
 </style>

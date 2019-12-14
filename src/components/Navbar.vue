@@ -34,7 +34,7 @@
 
                     <v-list>
                         <v-list-item> <router-link class="link" to="/newsfeeds">New Post</router-link></v-list-item>
-                        <v-list-item><router-link class="link" to="/newsfeeds">Feedback Form</router-link></v-list-item>
+                        <v-list-item><router-link class="link" to="/feedback">Feedback Form</router-link></v-list-item>
                     </v-list>
                 </v-menu>
                 <v-btn text class="nav__content__text"><router-link class="link" to="/groups">Groups</router-link></v-btn>
@@ -54,9 +54,14 @@
                         </v-btn>
                     </template>
 
-                    <v-list class="user_list">
+                    <v-list class="user_list" v-if="!login">
                         <v-list-item><router-link class="link" to="/login">Login</router-link></v-list-item>
                         <v-list-item><router-link class="link" to="/register">Signup</router-link></v-list-item>
+                    </v-list>
+
+                    <v-list class="user_list" v-else>
+                        <v-list-item><router-link class="link" to="/profile">Profile</router-link></v-list-item>
+                        <v-list-item><router-link class="link" to="/login">Logout</router-link></v-list-item>
                     </v-list>
                 </v-menu>
             </v-toolbar-items>
@@ -70,6 +75,7 @@
         data () {
             return {
                 state: "close",
+                login: false
             }
         },
         computed: {
