@@ -1,6 +1,6 @@
 <template>
   <v-footer dark padless>
-    <v-card flat tile class="indigo lighten-1 white--text text-center">
+    <v-card id="contact__us" flat tile class="indigo lighten-1 white--text text-center">
       <v-card-text>
         <a href="https://www.facebook.com" target="blank">
           <v-btn class="mx-4 white--text" icon>
@@ -58,5 +58,8 @@ export default {
 .icons {
   max-width: 22px;
   max-height: 22px;
+}
+#contact__us {
+  padding-top: 30px;
 }
 </style>
