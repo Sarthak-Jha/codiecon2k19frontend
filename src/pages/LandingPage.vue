@@ -2,7 +2,7 @@
     <main>
         <div class="parallax">
             <section class="welcome">
-                <input class="search" type="text" placeholder="What are you upto today?">
+                <input class="welcome__search" type="text" placeholder="What are you upto today?">
             </section>
             <section class="paragraph">
                 Some of the Popular Categories to look into...
