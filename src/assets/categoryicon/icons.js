@@ -7,7 +7,9 @@ const imageArr = {
     5: require('../categoryicon/flat.svg'),
     6: require('../categoryicon/idea.svg')
 }
+const avatar = require('../categoryicon/avatar.svg');
 
 export default {
-    imageArr
+    imageArr,
+    avatar
 }

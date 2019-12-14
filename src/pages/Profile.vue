@@ -1,48 +1,102 @@
 <template>
-    <div class="profiledata">
-        <v-card
-                class="mx-auto"
-        >
-            <v-avatar
-                    class="profile"
-                    size="164"
-                    tile
+    <div fluid class="profiledata">
+        <div class="profiledata__left box">
+            <v-navigation-drawer
+                :width="width"
+                :value="true"
+                stateless
             >
-                <v-img class="profile__pic" src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
-            </v-avatar>
-            <div class="profiledata__text">Name: <label>Mark Observer</label></div>
-            <div class="profiledata__text">Address: <label>Mark Observer awfjafafa afigafiafa ,fafigafkaf akfgaifkaf.</label></div>
-            <div class="profiledata__text">Contact: <label>8914xxxx90</label></div>
-            <div class="profiledata__text">DOB: <label>21/09/1992</label></div>
-        </v-card>
+                <v-img :aspect-ratio="16/9" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+                    <v-row align="end" class="lightbox white--text pa-2 fill-height">
+                        <v-col>
+                            <v-avatar
+                                    class="profile"
+                                    size="50"
+                                    tile
+                            >
+                                <v-img class="profile__pic" src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
+                            </v-avatar>
+                            <div class="subheading">Jonathan Lee</div>
+                        </v-col>
+                    </v-row>
+                </v-img>
+                <v-list>
+                    <template v-for="(item) in items">
+                        <v-list-item :key="item.title" @click="selectComponents(item.title)">
+                            <v-list-item-title>{{ item.title }}</v-list-item-title>
+                        </v-list-item>
+                    </template>
+                </v-list>
+            </v-navigation-drawer>
+        </div>
+        <div class="profiledata__right box">
+            <UserDetails v-if="isSelected('Profile')"></UserDetails>
+            <ActivityDetails v-if="isSelected('Activities')"></ActivityDetails>
+            <GroupDetails v-if="isSelected('Groups')"></GroupDetails>
+        </div>
     </div>
 </template>
 
 <script>
+    import UserDetails from "../components/UserDetails";
+    import ActivityDetails from "../components/ActivityDetails";
+    import GroupDetails from "../components/GroupDetails";
+
     export default {
-        name: "Profile"
+        name: "Profile",
+        data () {
+            return {
+                width: 300,
+                items: [
+                    { title: 'Profile' },
+                    { title: 'Groups' },
+                    { title: 'Activities' }
+                ],
+                selectedComponent: 'Profile'
+            }
+        },
+        components: {
+            UserDetails,
+            ActivityDetails,
+            GroupDetails
+        },
+        computed:{
+
+        },
+        methods: {
+            selectComponents(value) {
+                this.selectedComponent = value
+            },
+            isSelected(value) {
+                return this.selectedComponent === value
+            }
+
+        }
     }
 </script>
 
 <style lang="scss" scoped>
     .profiledata{
-        margin-top: 65px;
-        &__text{
-            margin: 20px;
-            font-weight: bold;
-            font-size: 20px;
-            font-family: sans-serif;
+        margin-top: 70px;
+        min-height: 500px;
+        &__right{
+            width:80%;
         }
-    }
-    .mx-auto{
-        display: flex;
-        flex-flow: Column;
-        justify-content: center;
-        align-items: center;
+        &__left{
+            min-height: 600px;
+            background: white;
+            width: 20%;
+        }
     }
     .profile{
         &__pic{
             border-radius: 100px;
         }
+    }
+    .subheading{
+        color: #333333;
+    }
+    .box{
+        display: inline-block;
     }
 </style>

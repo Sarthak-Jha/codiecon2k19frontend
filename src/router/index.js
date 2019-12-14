@@ -5,6 +5,7 @@ import Profile from '../pages/Profile.vue'
 import newsfeeds from '../pages/NewsFeeds'
 import loginpage from '../pages/LoginPage'
 import register from '../pages/SignUp'
+import Groups from "../pages/Groups";
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
     path: '/register',
     name: 'register',
     component: register
+  },
+  {
+    path: '/groups',
+    name: 'groups',
+    component: Groups
   }
 ]
 
