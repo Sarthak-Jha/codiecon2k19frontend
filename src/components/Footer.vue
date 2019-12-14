@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .icons {
   max-width: 22px;
   max-height: 22px;

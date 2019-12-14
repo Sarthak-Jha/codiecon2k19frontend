@@ -6,9 +6,12 @@
             </section>
             <section class="paragraph">
                 Some of the Popular Categories to look into...
-                <div class="text-center">
-                    <v-btn v-for="tag in tags" :key="tag" class="tag_button">{{tag}}</v-btn>
-                </div>
+                <section class="cards">
+                    <div class="text-center"  v-for="tag in tags" :key="tag">
+                        <activitycard :category="tag" @categorychoosen="selectCategory">
+                        </activitycard>
+                    </div>
+                </section>
             </section>
             <section>
                 <div class="heading">
@@ -16,7 +19,7 @@
                 </div>
                 <v-timeline>
                     <div v-for="data in timelinedata" :key="data.index">
-                        <timelineitem :timelinedata="data" @categorychoosen="selectCategory">
+                        <timelineitem :timelinedata="data">
                         </timelineitem>
                     </div>
                 </v-timeline>
@@ -27,54 +30,51 @@
 
 <script>
 import timelineitem from '../components/TimelineItem'
+import activitycard from '../components/ActivityCard'
 
 export default {
     name: "LandingPage",
     components: {
-        timelineitem
+        timelineitem,
+        activitycard
     },
     data () {
         return {
             tags: [
                 'all',
                 'tall',
-                'ball'
+                'ball',
+                'call',
+                'zoll'
             ],
             timelinedata: [{
                 'index': 0,
                 'heading': 'Buy',
                 'desc' : 'You can buy things within the organisation from the people around you',
-                'img' : '../assets/categoryicon/buy.svg'
             },{
                 'index': 1,
                 'heading': 'Sell',
                 'desc' : 'You can sell things within the organisation from the people around you',
-                'img' : '../assets/categoryicon/sell.svg'
             },{
                 'index': 2,
                 'heading': 'Rent',
                 'desc' : 'You can rent things within the organisation from the people around you',
-                'img' : '../assets/categoryicon/rent.svg'
             },{
                 'index': 3,
                 'heading': 'Borrow',
                 'desc' : 'You can borrow things within the organisation from the people around you',
-                'img' : '../assets/categoryicon/loan.svg'
             },{
                 'index': 4,
                 'heading': 'Activity',
                 'desc' : 'You can create activities like sports etc within the organisation from the people around you',
-                'img' : '../assets/categoryicon/social.svg'
             },{
                 'index': 5,
                 'heading': 'Flat Sharing',
                 'desc' : 'You can find flatmates within the organisation from the people around you',
-                'img' : '../assets/categoryicon/flat.svg'
             },{
                 'index': 6,
                 'heading': 'And More to Come...',
                 'desc' : 'We promise to keep on addding more services on discussion board...',
-                'img' : '../assets/categoryicon/flat.svg'
             }]
         }
     },
@@ -87,6 +87,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.text-center {
+    margin: 10px 10px;
+}
+.cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px 80px;
+}
 .heading {
     align-self: center;
     background: #ffffff;
