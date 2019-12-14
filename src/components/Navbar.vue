@@ -37,7 +37,7 @@
                         <v-list-item><router-link class="link" to="/newsfeeds">Feedback Form</router-link></v-list-item>
                     </v-list>
                 </v-menu>
-                <v-btn text class="nav__content__text"><router-link class="link" to="/newsfeeds">Groups</router-link></v-btn>
+                <v-btn text class="nav__content__text"><router-link class="link" to="/groups">Groups</router-link></v-btn>
                 <v-menu
                         bottom
                         origin="center center"
@@ -112,7 +112,7 @@
 
     #usericon {
         box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
-        
+
     }
     .link {
         text-decoration: none;
@@ -162,7 +162,7 @@
                 width: 0%;
                 transition: all 0.3s ease;
             }
-            i { 
+            i {
                 pointer-events: none;
             }
             input {
@@ -172,8 +172,8 @@
                 cursor: pointer;
                 transition: opacity 0.5s ease, width 1s ease;
                 -webkit-appearance:none
-            } 
+            }
         }
     }
-   
+
 </style>
