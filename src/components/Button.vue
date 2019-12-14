@@ -12,6 +12,16 @@ export default {
             type: String,
             required: true
         }
+    },
+    data () {
+        return {
+
+        }
+    },
+    methods: {
+        clickitem (id) {
+            this.$emit('clicked',id)
+        }
     }
 
 }
