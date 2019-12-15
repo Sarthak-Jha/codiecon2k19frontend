@@ -1,14 +1,13 @@
 import MainApi from '../../api/api'
 
 export const state = {
-    UserDetails: {
+    userDetails: {
         status : false
     }
 }
 
 export const mutations = {
     setUserDetails(state, payload) {
-		//debugger
 		state.userDetails = payload;
 	}
 }
@@ -36,10 +35,21 @@ export const actions = {
         })
     },
     doLogout ({commit}, {data, success,fail}) {
+        let headers = {
+            Authorization: 'Bearer ' + data.token
+        }
         MainApi.doLogout( (res) => {
             success && success(res)
-        }, data, (res) => {
+        }, (res) => {
             fail && fail()
+        },headers)
+    },
+    fetchUserDetails ({commit}) {
+        MainApi.getUserDetails( (res) => {
+            commit('setUserDetails', res.body)
+            success && success(res)
+        }, (res) => {
+            fail && fail(res)
         })
     }
 }

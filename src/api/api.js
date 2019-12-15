@@ -74,5 +74,7 @@ export default {
     },
     getSelf (cb, data, errHandler, headerParams) {
         httpApi.getDataViaApi(config.api.posts.getSelf, cb, data, errHandler, headerParams)
+    doLogout (cb, errHandler, headerParams) {
+        httpApi.deleteDataViaApi(config.api.users.logout, cb, errHandler, headerParams)
     }
 };

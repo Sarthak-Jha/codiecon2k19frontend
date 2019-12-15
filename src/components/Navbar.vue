@@ -61,7 +61,7 @@
 
                     <v-list class="user_list" v-else>
                         <v-list-item><router-link class="link" to="/profile">Profile</router-link></v-list-item>
-                        <v-list-item><router-link class="link" to="/login">Logout</router-link></v-list-item>
+                        <v-list-item @click="logout"><a href="javascript:void(0)" class="link">Logout</a></v-list-item>
                     </v-list>
                 </v-menu>
             </v-toolbar-items>
@@ -70,23 +70,53 @@
 </template>
 
 <script>
-    export default {
-        name: "Navbar",
-        data () {
-            return {
-                state: "close",
-                login: true
-            }
-        },
-        computed: {
-            show: function () {
-                if ( window.location.pathname == '/') {
-                    return false
-                }
-                return true
-            }
+import { mapActions, mapGetters } from "vuex";
+
+export default {
+    name: "Navbar",
+    data () {
+        return {
+            state: "close"
         }
+    },
+    computed: {
+        ...mapGetters(
+            'userStore',[
+                'isLoggedIn'
+        ]),
+        login () {
+            if(this.isLoggedIn.status || this.$session.get('isLoggedIn')) {
+                return true
+            } 
+            return false
+        },
+        show: function () {
+            if ( window.location.pathname == '/') {
+                return false
+            }
+            return true
+        }
+    },
+    methods: {
+        ...mapActions('userStore',[
+            'doLogout'
+        ]),
+        logout () {
+            let data = {
+                token: this.$session.get('token') 
+            }
+            this.doLogout({
+                data
+            })
+            this.$session.destroy();
+            localStorage.setItem('isLoggedIn', false);
+            localStorage.setItem('token', '');
+            this.$store.commit('userStore/setUserDetails', {
+                status : false
+            });  
+        },
     }
+}
 </script>
 
 <style lang="scss" scoped>
