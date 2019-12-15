@@ -9,7 +9,8 @@ import Groups from '../pages/Groups'
 import feedback from '../pages/FeedbackForm'
 import groupForm from '../pages/GroupForm'
 import postDetails from '../pages/PostDetails'
-import Postform from "../pages/Postform";
+import CreatePost from "../components/CreatePost"
+import PostForm from "../pages/Postform";
 
 Vue.use(VueRouter)
 
@@ -18,11 +19,6 @@ const routes = [
     path: '/',
     name: 'landing',
     component: Landing
-  },
-  {
-    path: '/createpost',
-    name: 'createpost',
-    component: () => import(/* webpackChunkName: "post" */ '../pages/Postform.vue')
   },
   {
     path: '/profile',
@@ -65,15 +61,19 @@ const routes = [
     component: postDetails
   },
   {
-    path: '/postform',
-    name: '/postform',
-    component: Postform
-    component: () => import(/* webpackChunkName: "postdetails" */ '../pages/PostDetails')
-  },
-  {
     path: '/userdetail',
     name: 'UserDetail',
     component: () => import(/* webpackChunkName: "userdetail" */ '../pages/UserDetail')
+  },
+  {
+    path: '/createpost',
+    name: 'CreatePost',
+    component: CreatePost
+  },
+  {
+    path: '/postform',
+    name: 'postForm',
+    component: PostForm
   }
 ]
 

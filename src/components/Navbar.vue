@@ -33,7 +33,7 @@
                     </template>
 
                     <v-list>
-                        <v-list-item> <router-link class="link" to="/postform">New Post</router-link></v-list-item>
+                        <v-list-item><router-link class="link" to="/createpost">Create Post</router-link></v-list-item>
                         <v-list-item><router-link class="link" to="/feedback">Feedback Form</router-link></v-list-item>
                     </v-list>
                 </v-menu>

@@ -5,7 +5,9 @@ import postStore from '../store/modules/postStore'
 
 Vue.use(Vuex)
 
-var modules = { userStore, postStors }
+let store = {}
+
+var modules = { userStore, postStore }
 
 if (window.addStoreModule) {
   window.addStoreModule(modules)
