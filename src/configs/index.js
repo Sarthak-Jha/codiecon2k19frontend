@@ -15,50 +15,50 @@ export default {
             validate: '/auth/api/v1/validate'
         },
         posts: {
-            addPost: '/api/v1/addPost',
+            addPost: '/post/api/v1/addPost',
             deletePost: function (postId) {
-                return '/api/v1/post' + postId
+                return '/post/api/v1/post' + postId
             },
             addComment: function (postId) {
-                return `/api/v1/post/${postId}/addComment`
+                return `/post/api/v1/post/${postId}/addComment`
             },
             closePost: function (postId) {
-                return `/api/v1/post/${postId}/closePost`
+                return `/post/api/v1/post/${postId}/closePost`
             },
             getCommentsByPostId: function (postId) {
-                return `/api/v1/post/${postId}/getCommentsByPostId`
+                return `/post/api/v1/post/${postId}/getCommentsByPostId`
             },
             addLike: function (postId) {
-                return `/api/v1/post/${postId}/addLike`
+                return `/post/api/v1/post/${postId}/addLike`
             },
-            addGroup: '/api/v1/post/addGroup',
+            addGroup: '/post/api/v1/post/addGroup',
             addMember: function (groupId) {
-                return '/api/v1/post/addMember/' + groupId
+                return '/post/api/v1/post/addMember/' + groupId
             },
             addViewCount: function (postId) {
-                return '/api/v1/post/addViewCount/' + postId
+                return '/post/api/v1/post/addViewCount/' + postId
             },
             deleteMember: function (groupId) {
-                return '/api/v1/post/deleteMember/' + groupId
+                return '/post/api/v1/post/deleteMember/' + groupId
             },
-            getAllCategories: '/api/v1/post/getAllCategories',
-            getAllGroups: '/api/v1/post/getAllGroups',
-            getAllLocations: '/api/v1/post/getAllLocations',
-            getAllTags: '/api/v1/post/getAllTags',
+            getAllCategories: '/post/api/v1/post/getAllCategories',
+            getAllGroups: '/post/api/v1/post/getAllGroups',
+            getAllLocations: '/post/api/v1/post/getAllLocations',
+            getAllTags: '/post/api/v1/post/getAllTags',
             getFormFeilds: function (category) {
-                return '/api/v1/post/getFormFeilds/' + category
+                return '/post/api/v1/post/getFormFeilds/' + category
             },
-            getGroupsByUser: '/api/v1/post/getGroupsByUser',
-            setCategory: '/api/v1/post/setCategory',
-            setForm: '/api/v1/post/setForm',
-            getSelf: '/api/v1/user/getSelf',
+            getGroupsByUser: '/post/api/v1/post/getGroupsByUser',
+            setCategory: '/post/api/v1/post/setCategory',
+            setForm: '/post/api/v1/post/setForm',
+            getSelf: '/post/api/v1/user/getSelf',
             getUserDetails: function (userId) {
-                return '/api/v1/user/getUser' + userId
+                return '/post/api/v1/user/getUser' + userId
             }
         },
         search: {
-            search: '/api/v1/search',
-            userAutoComplete: '/api/v1/userAutoComplete'
+            search: '/search/api/v1/search',
+            userAutoComplete: '/search/api/v1/userAutoComplete'
         }
 
     },
