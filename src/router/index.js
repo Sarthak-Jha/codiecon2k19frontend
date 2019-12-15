@@ -1,6 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../pages/LandingPage.vue'
+import Profile from '../pages/Profile.vue'
+import newsfeeds from '../pages/NewsFeeds'
+import loginpage from '../pages/LoginPage'
+import register from '../pages/SignUp'
+import Groups from '../pages/Groups'
+import feedback from '../pages/FeedbackForm'
+import groupForm from '../pages/GroupForm'
+import postDetails from '../pages/PostDetails'
+import CreatePost from "../components/CreatePost"
+import PostForm from "../pages/Postform";
 
 Vue.use(VueRouter)
 
@@ -9,14 +19,6 @@ const routes = [
     path: '/',
     name: 'landing',
     component: Landing
-  },
-  {
-    path: '/createpost',
-    name: 'createpost',
-    component: () => import(/* webpackChunkName: "post" */ '../pages/CreatePost.vue'),
-    meta      : {
-			authentication: 'required'
-		}
   },
   {
     path: '/profile',
@@ -83,6 +85,16 @@ const routes = [
     meta      : {
 			authentication: 'required'
 		}
+  },
+  {
+    path: '/createpost',
+    name: 'CreatePost',
+    component: CreatePost
+  },
+  {
+    path: '/postform',
+    name: 'postForm',
+    component: PostForm
   }
 ]
 
