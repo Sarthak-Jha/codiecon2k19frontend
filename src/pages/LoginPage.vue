@@ -83,7 +83,8 @@ export default {
         ...mapActions('userStore',[
             'validateLogin',
             'fetchUserDetails'
-        ],
+        ]),
+        ...mapActions(
         'postStore', [
             'allGroupsByUser'
         ]),
