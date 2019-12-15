@@ -82,6 +82,9 @@ export default {
     methods: {
         ...mapActions('userStore',[
             'validateLogin'
+        ],
+        'postStore', [
+            'allGroupsByUser'
         ]),
         handleSubmit () {
             let data = this.loginData
@@ -112,6 +115,9 @@ export default {
                 this.$store.commit('userStore/setUserDetails', {
 					status : true,
 					...resp.body.responseObject
+                })
+                this.allGroupsByUser({
+                    data
                 })
                 this.$router.push('/')
             } else {

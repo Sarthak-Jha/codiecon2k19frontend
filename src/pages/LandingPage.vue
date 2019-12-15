@@ -7,8 +7,8 @@
             <section class="paragraph">
                 Some of the Popular Categories to look into...
                 <section class="cards">
-                    <div class="text-center"  v-for="tag in tags" :key="tag">
-                        <activitycard :category="tag" @categorychoosen="selectCategory">
+                    <div v-if="getAllCategories.length" class="text-center" v-for="category in categories" :key="category.categoryId">
+                        <activitycard :category="category" @category="selectedCategory">
                         </activitycard>
                     </div>
                 </section>
@@ -31,6 +31,7 @@
 <script>
 import timelineitem from '../components/TimelineItem'
 import activitycard from '../components/ActivityCard'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: "LandingPage",
@@ -40,13 +41,7 @@ export default {
     },
     data () {
         return {
-            tags: [
-                'all',
-                'tall',
-                'ball',
-                'call',
-                'zoll'
-            ],
+            categories: [],
             timelinedata: [{
                 'index': 0,
                 'heading': 'Buy',
@@ -78,11 +73,30 @@ export default {
             }]
         }
     },
-    methods: {
-        selectCategory (name) {
-
+    watch: {
+        getAllCategories() {
+            this.categories = this.getAllCategories
         }
-    }
+    },
+    computed: {
+        ...mapGetters('postStore',[
+            'getAllCategories'
+        ]),
+
+    },
+    methods: {
+        ...mapActions('postStore',[
+            'allCategories',
+            'allLocations',
+            'allTags'
+        ]),
+    },
+    mounted () {
+        this.allCategories({}),
+        this.allLocations({}),
+        this.allTags({})
+        this.categories = this.getAllCategories
+    },
 }
 </script>
 
@@ -136,9 +150,9 @@ export default {
 }
 .paragraph {
     color: #777;
-    opacity: 0.6;
+    opacity: 0.9;
     background-color: #ffffff;
-    filter: alpha(opacity=60);
+    filter: alpha(opacity=90);
     text-align:center;
     min-height: 300px;
     padding:50px 80px;
