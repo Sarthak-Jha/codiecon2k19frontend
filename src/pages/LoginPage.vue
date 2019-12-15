@@ -84,9 +84,7 @@ export default {
             'validateLogin'
         ]),
         handleSubmit () {
-            debugger
             let data = this.loginData
-            console.log("handle Submit", data)
             if (this.validateCredentials) {
                 this.validateLogin({
                     data,

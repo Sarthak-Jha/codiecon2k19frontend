@@ -113,7 +113,8 @@ export default {
             localStorage.setItem('token', '');
             this.$store.commit('userStore/setUserDetails', {
                 status : false
-            });  
+            })
+            this.$router.push('/')
         },
     }
 }

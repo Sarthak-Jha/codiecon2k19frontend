@@ -11,8 +11,18 @@ export const mutations = {
 }
 
 export const actions = {
-    selectCategory({commit}, value) {
+    selectCategory ({commit}, value) {
         commit('setSelectedCategory', value)
+    },
+    getAllCategories ({commit}, {data, success,fail} ) {
+        let headers = {
+            Authorization: 'Bearer ' + data.token
+        }
+        MainApi.doLogout( (res) => {
+            success && success(res)
+        }, (res) => {
+            fail && fail()
+        },headers)
     }
 }
 
