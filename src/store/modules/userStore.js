@@ -54,7 +54,8 @@ export const actions = {
     },
     fetchUserDetails ({commit},{data, success, fail}) {
         MainApi.getSelf( (res) => {
-            commit('setUserSelfDetails', res.body)
+            console.log('ffff', res.body.responseObject)
+            commit('setUserSelfDetails', res.body.responseObject)
             success && success(res)
         }, (res) => {
             fail && fail(res)
@@ -67,6 +68,7 @@ export const getters = {
 		return state.userDetails;
 	},
     userSelfDetails(state) {
+        console.log('getter', state.userSelfDetails)
         return state.userSelfDetails;
     },
     getisLoggedIn (state) {

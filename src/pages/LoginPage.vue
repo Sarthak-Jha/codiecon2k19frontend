@@ -14,7 +14,7 @@
                                 <v-form>
 
                                     <v-text-field
-                                        label="Username"
+                                        label="E-mail"
                                         name="login"
                                         type="text"
                                         v-model="loginData.mailId"

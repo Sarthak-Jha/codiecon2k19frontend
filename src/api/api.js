@@ -81,5 +81,7 @@ export default {
         formdata.append('fileType', data.fileType)
         formdata.append('type', data.type)
 	    httpApi.postDataViaApi(config.api.posts.imageUpload(data), cb, formdata, errHandler, headerParams)
+    search (cb, data, errHandler, apiParam) {
+        httpApi.postDataViaApi(config.api.search.search(apiParam), cb, data, errHandler)
     }
 };

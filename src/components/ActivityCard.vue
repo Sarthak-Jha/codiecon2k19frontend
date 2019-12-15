@@ -21,14 +21,14 @@ export default {
     name: 'activityCard',
     props: {
         category: {
-            type: Array,
+            type: Object,
             required: true,
             default: () => []
         }
     },
     methods: {
         selectedCategory (id) {
-            this.$emit('category', id)
+            this.$emit('clicked', id)
         }
     }
 }

@@ -8,21 +8,21 @@
                 <section class="pagination">
                     <div class="text-center">
                         <v-pagination
-                        v-model="page"
+                        v-model="currentPage"
                         :length="totalPage"
                         circle
                         ></v-pagination>
                     </div>
                 </section>
                 <section class="cards">
-                    <div class="cards__single" v-for="post in 10" :key="post">
+                    <div class="cards__single" v-for="post in getSearchResult.contentList" :key="post.postId">
                         <post-card :postData="post"></post-card>
                     </div>
                 </section>
                 <section class="pagination">
                     <div class="text-center">
                         <v-pagination
-                        v-model="page"
+                        v-model="currentPage"
                         :length="totalPage"
                         circle
                         ></v-pagination>
@@ -36,6 +36,7 @@
 <script>
 import postCard from '../components/PostCard'
 import searchFilters from '../components/SearchFilters'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'newsfeeds',
@@ -43,9 +44,37 @@ export default {
         postCard,
         searchFilters
     },
+    mounted () {
+        if (!this.$route.query.category) {
+            let data = {
+                'category' : 'all'
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        }
+
+    },
+    computed: {
+        ...mapGetters('searchStore',['getSearchResult']),
+        totalPage () {
+            if (this.getSearchResult.totalElements%6 == 0) {
+                return this.getSearchResult.totalElements/6
+            }
+            return this.getSearchResult.totalElements/6 + 1
+        }
+
+    },
+    methods: {
+        ...mapActions('searchStore',['makeSearch'])
+
+    },
     data () {
         return {
-            page: 1,
+            currentPage: 1,
             totalPage: 10,
             posts : {
                 "postId": "0c52b8ed-c133-4361-93eb-4ff9146771f0",
@@ -104,6 +133,7 @@ export default {
     justify-content: space-evenly; 
     &__single {
         margin: 10px 30px;
+        min-width: 25vw;
     }
 }
 .pagination {

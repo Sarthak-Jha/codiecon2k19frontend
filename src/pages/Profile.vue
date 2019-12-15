@@ -16,7 +16,7 @@
                             >
                                 <v-img class="profile__pic" src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
                             </v-avatar>
-                            <div class="subheading">Jonathan Lee</div>
+                            <div class="subheading">{{fullname}}</div>
                         </v-col>
                     </v-row>
                 </v-img>
@@ -62,10 +62,14 @@
             GroupDetails
         },
         computed:{
-            ...mapGetters('userStore',['userSelfDetails'])
+            ...mapGetters('userStore',['userSelfDetails']),
+            fullname () {
+                console.log("hss", this.userSelfDetails)
+                return this.userSelfDetails.firstName + ' ' + this.userSelfDetails.lastName
+            }
         },
         methods: {
-            ...mapActions([ 'fetchUserDetails' ]),
+            ...mapActions('userStore',[ 'fetchUserDetails' ]),
             selectComponents(value) {
                 this.selectedComponent = value
             },

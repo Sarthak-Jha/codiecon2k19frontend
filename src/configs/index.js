@@ -60,7 +60,9 @@ export default {
             }
         },
         search: {
-            search: ':8060/search/api/v1/search',
+            search: function (pageNumber){
+                return `:8060/search/api/v1/search?pageNumber=${pageNumber}&pageSize=6`
+            },
             userAutoComplete: ':8060/search/api/v1/userAutoComplete'
         }
 
