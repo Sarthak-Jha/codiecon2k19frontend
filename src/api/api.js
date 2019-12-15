@@ -74,5 +74,12 @@ export default {
     },
     getSelf (cb, data, errHandler, headerParams) {
         httpApi.getDataViaApi(config.api.posts.getSelf, cb, data, errHandler, headerParams)
+    },
+    uploadFile (cb, data, errHandler, headerParams) {
+	    let formdata = new FormData()
+        formdata.append('file', data.file)
+        formdata.append('fileType', data.fileType)
+        formdata.append('type', data.type)
+	    httpApi.postDataViaApi(config.api.posts.imageUpload(data), cb, formdata, errHandler, headerParams)
     }
 };

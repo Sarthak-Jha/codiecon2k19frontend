@@ -22,7 +22,9 @@ export default {
 	postDataViaApi(path, callback, data, errorHandler, headerParams) {
 		let headerObject = { 'Cache-Control': 'no-cache' };
 		Vue.http
-			.post(config.getApiPath(path), data)
+			.post(config.getApiPath(path), data, {
+				headers : typeof headerParams !== 'undefined' ? Object.assign(headerObject, headerParams) : headerObject
+			})
 			.then(
 				(response) => callback(response),
 				(error) => {
