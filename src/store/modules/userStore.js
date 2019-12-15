@@ -4,7 +4,8 @@ export const state = {
     userDetails: {
         status : false
     },
-    userSelfDetails: {}
+    userSelfDetails: {},
+    isLoggedIn: false,
 }
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
 	},
     setUserSelfDetails(state, payload) {
         state.userSelfDetails = payload
+    },
+    setIsLoggedIn (state, payload) {
+        state.isLoggedIn = payload
     }
 }
 
@@ -64,6 +68,9 @@ export const getters = {
 	},
     userSelfDetails(state) {
         return state.userSelfDetails;
+    },
+    getisLoggedIn (state) {
+        state.isLoggedIn
     }
 }
 
