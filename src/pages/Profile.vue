@@ -71,6 +71,9 @@
                 return this.selectedComponent === value
             }
 
+        },
+        mounted() {
+                
         }
     }
 </script>
