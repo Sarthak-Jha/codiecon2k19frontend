@@ -45,17 +45,17 @@ export default {
     deleteMember (cb, data, errHandler, headerParams, apiParam) {
         httpApi.deleteDataViaApi(config.api.posts.deleteMember(apiParam), cb, data, errHandler, headerParams)
     },
-    getAllCategories (cb, data, errHandler, headerParams) {
-        httpApi.getDataViaApi(config.api.posts.getAllCategories, cb, data, errHandler, headerParams)
+    getAllCategories (cb, data, errHandler) {
+        httpApi.getDataViaApi(config.api.posts.getAllCategories, cb, data, errHandler)
     },
     getAllGroups (cb, data, errHandler, headerParams) {
-        httpApi.getDataViaApi(config.api.posts.getAllGroups, cb, data, errHandler, headerParams)
+        httpApi.getDataViaApi(config.api.posts.getAllGroups, cb, errHandler, headerParams)
     },
-    getAllTags (cb, data, errHandler, headerParams) {
-        httpApi.getDataViaApi(config.api.posts.getAllTags, cb, data, errHandler, headerParams)
+    getAllTags (cb, data, errHandler) {
+        httpApi.getDataViaApi(config.api.posts.getAllTags, cb, data, errHandler)
     },
-    getAllLocations (cb, data, errHandler, headerParams) {
-        httpApi.getDataViaApi(config.api.posts.getAllLocations, cb, data, errHandler, headerParams)
+    getAllLocations (cb, data, errHandler) {
+        httpApi.getDataViaApi(config.api.posts.getAllLocations, cb, data, errHandler)
     },
     getFormFeilds (cb, data, errHandler, headerParams, apiParam) {
         httpApi.getDataViaApi(config.api.posts.getFormFeilds(apiParam), cb, data, errHandler, headerParams)

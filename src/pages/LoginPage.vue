@@ -83,6 +83,9 @@ export default {
         ...mapActions('userStore',[
             'validateLogin',
             'fetchUserDetails'
+        ],
+        'postStore', [
+            'allGroupsByUser'
         ]),
         handleSubmit () {
             let data = this.loginData
@@ -118,6 +121,9 @@ export default {
                     Authorization: 'Bearer ' + this.$session.get('token')
                 }
                 this.fetchUserDetails({
+                    data
+                })
+                this.allGroupsByUser({
                     data
                 })
                 this.$router.push('/')
