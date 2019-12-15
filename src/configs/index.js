@@ -54,6 +54,9 @@ export default {
             getSelf: ':8091/post/api/v1/user/getSelf',
             getUserDetails: function (userId) {
                 return ':8091/post/api/v1/user/getUser' + userId
+            },
+            imageUpload (data) {
+              return ':8091/post/image/upload?fileType='+ data.fileType + '&type=' + data.type
             }
         },
         search: {

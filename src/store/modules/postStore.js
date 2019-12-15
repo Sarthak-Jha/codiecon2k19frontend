@@ -6,6 +6,8 @@ export const state = {
     allGroupsByUser: [],
     allLocations: [],
     allTags: [],
+    allPostType: [],
+    imageUploadLink: ''
 }
 
 export const mutations = {
@@ -13,7 +15,6 @@ export const mutations = {
         state.selectedCategory = value
     },
     setAllCategories (state, value) {
-        console.log("mutation", value)
         state.allCategories = value
     },
     setAllGroupsByUser (state, value) {
@@ -24,6 +25,12 @@ export const mutations = {
     },
     setAllTags (state, value) {
         state.allTags = value
+    },
+    allPostType(state, value) {
+        state.allPostType = value
+    },
+    setImageLink (state, value) {
+        state.imageUploadLink = value
     }
 }
 
@@ -44,7 +51,6 @@ export const actions = {
             Authorization: 'Bearer ' + data.token
         }
         MainApi.getGroupsByUser( (res) => {
-            console.log('categories' ,res.body.responseObject)
             commit('setAllGroupsByUser', res.body.responseObject)
             success && success(res)
         }, (res) => {
@@ -53,7 +59,6 @@ export const actions = {
     },
     allLocations ({commit}, {data, success,fail}) {
         MainApi.getAllLocations( (res) => {
-            console.log('locations' ,res.body.responseObject)
             commit('setAllLocations', res.body.responseObject)
             success && success(res)
         }, (res) => {
@@ -62,12 +67,36 @@ export const actions = {
     },
     allTags ({commit}, {data, success,fail}) {
         MainApi.getAllTags( (res) => {
-            console.log('allTags' ,res.body.responseObject)
             commit('setAllTags', res.body.responseObject)
             success && success(res)
         }, (res) => {
             fail && fail()
         })
+    },
+    setAllPostType ({commit}, data) {
+        commit('allPostType', data)
+    },
+    getUploadLinkImage({commit}, {data, success, fail}) {
+        let headers = {
+            'Content-Type': 'multipart/form-data',
+        }
+        MainApi.uploadFile( (res) => {
+            commit('setImageLink', res.body)
+            success && success(res)
+        }, data, (res) => {
+            fail && fail()
+        },headers)
+    },
+    submitPostForm ({commit}, {data, head, success, fail}) {
+        let headers = {
+            Authorization: 'Bearer ' + head.token
+        }
+        MainApi.addPost( (res) => {
+            alert("form Posted Succesfully")
+            success && success(res)
+        }, data, (res) => {
+            fail && fail(res)
+        },headers)
     }
 }
 
@@ -76,7 +105,6 @@ export const getters = {
         return state.selectedCategory
     },
     getAllCategories (state) {
-        console.log("getters", state.allCategories)
         return state.allCategories
     },
     getAllGroupsByUser (state) {
@@ -87,6 +115,12 @@ export const getters = {
     },
     getAllTags (state) {
         return state.allTags
+    },
+    getAllPostType (state) {
+        return state.allPostType
+    },
+    getImageUploadLink (state) {
+        return state.imageUploadLink
     }
 }
 

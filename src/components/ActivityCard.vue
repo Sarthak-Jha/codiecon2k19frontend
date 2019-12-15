@@ -11,8 +11,8 @@
       width= "300px"
       :src="category.categoryImage"
     >
-      <v-card-title>{{category.categoryName}}</v-card-title>
     </v-img>
+    <v-card-title>{{category.categoryName}}</v-card-title>
   </v-card>
 </template>
 

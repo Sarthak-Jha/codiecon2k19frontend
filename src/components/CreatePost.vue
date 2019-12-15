@@ -2,7 +2,7 @@
     <section class="paragraph">
         Select Category
         <section class="cards" >
-            <div class="text-center"  v-for="tag in tags" :key="tag">
+            <div class="text-center"  v-for="tag in getAllCategories" :key="tag">
                 <category-page :category="tag">
                 </category-page>
             </div>
@@ -12,6 +12,7 @@
 
 <script>
     import categoryPage from './CategoryPage'
+    import {mapGetters, mapActions} from 'vuex'
 
     export default {
         name: "CreatePost",
@@ -24,6 +25,9 @@
         },
         components: {
             categoryPage
+        },
+        computed: {
+            ...mapGetters('postStore', ['getAllCategories'])
         }
     }
 </script>
