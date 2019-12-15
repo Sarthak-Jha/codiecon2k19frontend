@@ -46,7 +46,7 @@
                                             </v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
-                                    
+
                                 </v-form>
                             </v-card-text>
                             <v-card-actions>
@@ -81,7 +81,8 @@ export default {
     },
     methods: {
         ...mapActions('userStore',[
-            'validateLogin'
+            'validateLogin',
+            'fetchUserDetails'
         ]),
         handleSubmit () {
             let data = this.loginData
@@ -112,6 +113,12 @@ export default {
                 this.$store.commit('userStore/setUserDetails', {
 					status : true,
 					...resp.body.responseObject
+                })
+                let data = {
+                    Authorization: 'Bearer ' + this.$session.get('token')
+                }
+                this.fetchUserDetails({
+                    data
                 })
                 this.$router.push('/')
             } else {

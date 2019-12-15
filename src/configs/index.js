@@ -1,5 +1,5 @@
 export default {
-    api: { 
+    api: {
         base_path: {
             auth: '10.177.68.18',
             post: '10.177.68.18:8091/api/v1',

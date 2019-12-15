@@ -139,15 +139,12 @@ export default {
     name: 'postForm',
     data () {
         return {
-            catgeoryType: [
-                'Accomodation', 'Electronics', 'Household', 'Vehicles', 'Activities', 'Discussion', 'Miscllaneous',
-            ],
-            items: ['foo', 'bar', 'fizz', 'buzz'],
-            value: [],
             rules: [
                 value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
             ],
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+            postTitle: '',
+            postDescription: '',
+
         }
     },
     computed: {
