@@ -81,12 +81,18 @@ const routes = [
   {
     path: '/createpost',
     name: 'CreatePost',
-    component: CreatePost
+    component: CreatePost,
+    meta      : {
+      authentication: 'required'
+    }
   },
   {
     path: '/postform',
     name: 'postForm',
-    component: PostForm
+    component: PostForm,
+    meta      : {
+      authentication: 'required'
+    }
   }
 ]
 
@@ -113,7 +119,7 @@ router.beforeEach((to, from, next) => {
     next();
   } else if (authenticationCheck(to) && !isLoggedIn){
     // console.log(' @@ MY SESSION (ELSE IF)= ', isLoggedIn)
-    next({name: 'login'});
+    next('/login');
   } else {
     // console.log(' @@ MY SESSION (ELSE)= ', isLoggedIn)
     next()

@@ -46,7 +46,7 @@
                                             </v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
-                                    
+
                                 </v-form>
                             </v-card-text>
                             <v-card-actions>
@@ -81,7 +81,8 @@ export default {
     },
     methods: {
         ...mapActions('userStore',[
-            'validateLogin'
+            'validateLogin',
+            'fetchUserDetails'
         ],
         'postStore', [
             'allGroupsByUser'
@@ -115,6 +116,12 @@ export default {
                 this.$store.commit('userStore/setUserDetails', {
 					status : true,
 					...resp.body.responseObject
+                })
+                let data = {
+                    Authorization: 'Bearer ' + this.$session.get('token')
+                }
+                this.fetchUserDetails({
+                    data
                 })
                 this.allGroupsByUser({
                     data

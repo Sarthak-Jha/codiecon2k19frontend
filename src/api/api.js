@@ -12,11 +12,11 @@ export default {
     verifyRegister (cb, data, errHandler) {
         httpApi.postDataViaApi(config.api.users.validate, cb, data, errHandler)
     },
-    doLogout (cb, data, errHandler) {
-        httpApi.deleteDataViaApi(config.api.users.logout, cb, data, errHandler)
+    doLogout (cb, data, errHandler, headerParams) {
+        httpApi.deleteDataViaApi(config.api.users.logout, cb, data, errHandler, headerParams)
     },
     addPost (cb, data, errHandler, headerParams) {
-        httpApi.postDataViaApi(config.api.posts.addPost, cb, data, errHandler, headerParams) 
+        httpApi.postDataViaApi(config.api.posts.addPost, cb, data, errHandler, headerParams)
     },
     deletePost (cb, data, errHandler, headerParams, apiParam) {
         httpApi.deleteDataViaApi(config.api.posts.deletePost(apiParam), cb, data, errHandler, headerParams)
@@ -48,7 +48,7 @@ export default {
     getAllCategories (cb, data, errHandler) {
         httpApi.getDataViaApi(config.api.posts.getAllCategories, cb, data, errHandler)
     },
-    getAllGroups (cb, errHandler, headerParams) {
+    getAllGroups (cb, data, errHandler, headerParams) {
         httpApi.getDataViaApi(config.api.posts.getAllGroups, cb, errHandler, headerParams)
     },
     getAllTags (cb, data, errHandler) {
@@ -75,4 +75,4 @@ export default {
     getSelf (cb, data, errHandler, headerParams) {
         httpApi.getDataViaApi(config.api.posts.getSelf, cb, data, errHandler, headerParams)
     }
-}
+};
