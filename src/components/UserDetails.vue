@@ -11,9 +11,9 @@
                 </v-avatar>
             </v-col>
         </v-row>
-        <div class="userData">Jonathan Lee</div>
-        <div class="userData">Email@gmail.com</div>
-        <div class="userData">90148141XX</div>
+        <div class="userData">{{fullname}}</div>
+        <div class="userData">{{userSelfDetails.mailId}}</div>
+        <div class="userData">{{userSelfDetails.phoneNumber}}</div>
         <div class="userData">Intrests:</div>
         <div class="userDataList">
             <div v-for="val in item.interest">
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
     export default {
         name: "UserDetails",
         data () {
@@ -31,11 +33,20 @@
                 item: {
                     interest: [
                         'badminton',
-                        'cricket'
+                        'cricket',
+                        'football'
                     ]
                 }
             }
-        }
+        },
+        computed:{
+            ...mapGetters('userStore',['userSelfDetails']),
+            fullname () {
+                console.log("hss", this.userSelfDetails)
+                return this.userSelfDetails.firstName + ' ' + this.userSelfDetails.lastName
+            }
+
+        },
     }
 </script>
 

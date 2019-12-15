@@ -85,7 +85,7 @@ export default {
                 'isLoggedIn'
         ]),
         login () {
-            if(this.isLoggedIn.status || this.$session.get('isLoggedIn')) {
+            if(this.isLoggedIn.status || this.$session.get('isLoggedIn') || sessionStorage.getItem('isLoggedIn')) {
                 return true
             } 
             return false
@@ -109,8 +109,8 @@ export default {
                 data
             })
             this.$session.destroy();
-            localStorage.setItem('isLoggedIn', false);
-            localStorage.setItem('token', '');
+            sessionStorage.setItem('isLoggedIn', false);
+            sessionStorage.setItem('token', '');
             this.$store.commit('userStore/setUserDetails', {
                 status : false
             })

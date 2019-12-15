@@ -47,15 +47,12 @@ export const actions = {
         })
     },
     allGroupsByUser ({commit}, {data, success,fail}) {
-        let headers = {
-            Authorization: 'Bearer ' + data.token
-        }
         MainApi.getGroupsByUser( (res) => {
             commit('setAllGroupsByUser', res.body.responseObject)
             success && success(res)
         }, (res) => {
             fail && fail()
-        },headers)
+        },data)
     },
     allLocations ({commit}, {data, success,fail}) {
         MainApi.getAllLocations( (res) => {

@@ -9,30 +9,41 @@
             </v-list-item-avatar>
                 <v-list-item-content>
                     <v-list-item-title class="headline">
-                        <router-link class="link" to="/postdetails">aloha</router-link>
+                        <router-link class="link" to="/postdetails">{{postData.title}}</router-link>
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        <router-link class="link" to="/userdetail">by chahi</router-link>
+                        <router-link class="link" to="/userdetail">by {{getName}}</router-link>
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
 
             <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+            :src="postData.photoLinks[0]"
             height="194"
             ></v-img>
-
-            <v-card-text>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa rem ea unde laborum maiores natus. Praesentium velit soluta nemo fugiat. Quis enim odio nobis? Obcaecati temporibus nihil accusamus beatae tenetur.
-            </v-card-text>
-
+            <v-card-title>
+                {{postData.type}}
+            </v-card-title>
+            <v-card-title>
+                <v-btn disabled v-for="tag in postData.tags" :key="tag">
+                    {{tag}}
+                </v-btn>
+            </v-card-title>
+            <v-card-title>
+                {{postData.commentsCounts}} Comments
+            </v-card-title>
         <v-card-actions>
         <v-btn text color="deep-purple accent-4">
             <router-link class="link" to="/postdetails">Read</router-link>
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn icon>
-            <v-icon>mdi-heart</v-icon>
+
+        <v-card-title>
+            {{postData.likeCounts}} 
+        </v-card-title>
+
+        <v-btn icon @click="handleLike">
+            <v-icon v-bind:class="{ active: postData.alreadyLiked }">mdi-heart</v-icon>
         </v-btn>
         </v-card-actions>
     </v-card>
@@ -47,6 +58,16 @@ export default {
             required: true,
             default: () => {}
         }
+    },
+    computed: {
+        getName () {
+            return this.postData.posterFirstName + '' + this.postData.posterLastName
+        }
+    },
+    methods: {
+        handleLike () {
+            this.postData.alreadyLiked = !this.postData.alreadyLiked
+        }
     }
 }
 </script>
@@ -54,5 +75,8 @@ export default {
 <style lang="scss" scoped>
     .link {
         text-decoration: none;
+    }
+    .active {
+        background-color: red;
     }
 </style>

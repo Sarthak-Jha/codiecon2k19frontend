@@ -8,7 +8,7 @@
                 Some of the Popular Categories to look into...
                 <section class="cards">
                     <div v-if="getAllCategories.length" class="text-center" v-for="category in categories" :key="category.categoryId">
-                        <activitycard :category="category" @category="selectedCategory">
+                        <activitycard :category="category" @clicked="selectedCategory">
                         </activitycard>
                     </div>
                 </section>
@@ -41,6 +41,7 @@ export default {
     },
     data () {
         return {
+            currentPage: 1,
             categories: [],
             timelinedata: [{
                 'index': 0,
@@ -82,7 +83,6 @@ export default {
         ...mapGetters('postStore',[
             'getAllCategories'
         ]),
-
     },
     methods: {
         ...mapActions('postStore',[
@@ -90,6 +90,24 @@ export default {
             'allLocations',
             'allTags'
         ]),
+        ...mapActions('searchStore',['makeSearch']),
+        selectedCategory( value ) {
+            let data = {
+                'category' : value
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        success () {
+            this.$router.push({ path: 'newsfeeds', query: { category : 'category' }})
+        },
+        fail () {
+
+        }
     },
     mounted () {
         this.allCategories({}),

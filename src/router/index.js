@@ -113,7 +113,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'))
+  let isLoggedIn = JSON.parse(sessionStorage.getItem('isLoggedIn'))
   if (authenticationCheck(to) && isLoggedIn) {
     // console.log(' @@ MY SESSION (IF)= ', isLoggedIn)
     next();
