@@ -124,7 +124,7 @@ export default {
     &__search {
         position: relative;
         color: #777;
-        opacity: 0.6;
+        opacity: 0.9;
         background-color: #ffffff;
         filter: alpha(opacity=60);
         border-radius: 30px;

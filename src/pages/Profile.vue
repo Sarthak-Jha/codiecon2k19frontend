@@ -41,6 +41,7 @@
     import UserDetails from "../components/UserDetails";
     import ActivityDetails from "../components/ActivityDetails";
     import GroupDetails from "../components/GroupDetails";
+    import { mapActions, mapGetters} from 'vuex'
 
     export default {
         name: "Profile",
@@ -61,19 +62,16 @@
             GroupDetails
         },
         computed:{
-
+            ...mapGetters('userStore',['userSelfDetails'])
         },
         methods: {
+            ...mapActions([ 'fetchUserDetails' ]),
             selectComponents(value) {
                 this.selectedComponent = value
             },
             isSelected(value) {
                 return this.selectedComponent === value
             }
-
-        },
-        mounted() {
-                
         }
     }
 </script>
