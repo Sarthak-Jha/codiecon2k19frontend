@@ -2,7 +2,7 @@
   <v-card
     class="mx-auto"
     min-width="200"
-    
+
     @click="selectedCategory"
   >
     <v-img
