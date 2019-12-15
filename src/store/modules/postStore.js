@@ -1,3 +1,5 @@
+import MainApi from '../../api/api'
+
 export const state = {
     selectedCategory: ''
 }

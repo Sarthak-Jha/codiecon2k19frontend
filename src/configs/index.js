@@ -1,6 +1,11 @@
 export default {
     api: { 
-        base_path: '/api/v1',
+        base_path: {
+            auth: '10.177.68.18:8079/auth/api/v1',
+            post: '10.177.68.18:8091/api/v1',
+            solr: '10.177.68.18:8060/api/v1',
+            base: '/api/v1',
+        },
         users: {
             login: '/login',
             register: '/register',
@@ -55,6 +60,13 @@ export default {
 
     },
     getApiPath: function (apiPath) {
-        return this.api.base_path + apiPath
-    }
+        return 'http://' + this.api.base_path.auth + apiPath
+    },
+    getApiPathPost: function (apiPath) {
+        return 'http://' + this.api.base_path.post + apiPath
+    },
+    getApiPathSolr: function (apiPath) {
+        return 'http://' + this.api.base_path.solr + apiPath
+    },
+
 }

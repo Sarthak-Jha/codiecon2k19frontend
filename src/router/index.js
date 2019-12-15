@@ -23,12 +23,18 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '../pages/Profile.vue')
+    component: () => import(/* webpackChunkName: "profile" */ '../pages/Profile.vue'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/newsfeeds',
     name: 'newsfeeds',
-    component: () => import(/* webpackChunkName: "newsfeeds" */ '../pages/NewsFeeds')
+    component: () => import(/* webpackChunkName: "newsfeeds" */ '../pages/NewsFeeds'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/login',
@@ -43,27 +49,42 @@ const routes = [
   {
     path: '/groups',
     name: 'groups',
-    component: () => import(/* webpackChunkName: "groups" */ '../pages/Groups')
+    component: () => import(/* webpackChunkName: "groups" */ '../pages/Groups'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/feedback',
     name: 'feedbackForm',
-    component: () => import(/* webpackChunkName: "feedbackform" */ '../pages/FeedbackForm')
+    component: () => import(/* webpackChunkName: "feedbackform" */ '../pages/FeedbackForm'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/groupform',
     name: 'groupForm',
-    component: () => import(/* webpackChunkName: "groupform" */ '../pages/GroupForm')
+    component: () => import(/* webpackChunkName: "groupform" */ '../pages/GroupForm'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/postdetails',
     name: 'postDetails',
-    component: postDetails
+    component: () => import(/* webpackChunkName: "postdetails" */ '../pages/PostDetails'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/userdetail',
     name: 'UserDetail',
-    component: () => import(/* webpackChunkName: "userdetail" */ '../pages/UserDetail')
+    component: () => import(/* webpackChunkName: "userdetail" */ '../pages/UserDetail'),
+    meta      : {
+			authentication: 'required'
+		}
   },
   {
     path: '/createpost',
@@ -92,5 +113,29 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 })
+
+router.beforeEach((to, from, next) => {
+  let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'))
+  if (authenticationCheck(to) && isLoggedIn) {
+    // console.log(' @@ MY SESSION (IF)= ', isLoggedIn)
+    next();
+  } else if (authenticationCheck(to) && !isLoggedIn){
+    // console.log(' @@ MY SESSION (ELSE IF)= ', isLoggedIn)
+    next({name: 'login'});
+  } else {
+    // console.log(' @@ MY SESSION (ELSE)= ', isLoggedIn)
+    next()
+  }
+})
+
+function authenticationCheck (route) {
+  let flag = false
+  if (route.meta.authentication === 'required') {
+    flag = true
+  } else {
+    flag = false
+  }
+  return flag
+}
 
 export default router
