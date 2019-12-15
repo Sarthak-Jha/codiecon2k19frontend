@@ -66,7 +66,11 @@ export default {
     name: 'groupForm',
     data () {
         return {
-
+            rules: [
+                value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
+            ],
+            chips: [],
+            items: []
         }
     }
 }

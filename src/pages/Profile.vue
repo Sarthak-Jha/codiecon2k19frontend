@@ -77,7 +77,7 @@
 
 <style lang="scss" scoped>
     .profiledata{
-        margin-top: 70px;
+        margin-top: 65px;
         min-height: 500px;
         &__right{
             width:80%;
