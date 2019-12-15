@@ -11,7 +11,9 @@
                     <v-list-item-title class="headline">
                         <router-link class="link" to="/postdetails">aloha</router-link>
                     </v-list-item-title>
-                    <v-list-item-subtitle>by chahi</v-list-item-subtitle>
+                    <v-list-item-subtitle>
+                        <router-link class="link" to="/userdetail">by chahi</router-link>
+                    </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
 
@@ -25,17 +27,8 @@
             </v-card-text>
 
         <v-card-actions>
-        <v-btn
-            text
-            color="deep-purple accent-4"
-        >
-            Read
-        </v-btn>
-        <v-btn
-            text
-            color="deep-purple accent-4"
-        >
-            Bookmark
+        <v-btn text color="deep-purple accent-4">
+            <router-link class="link" to="/postdetails">Read</router-link>
         </v-btn>
         <v-spacer></v-spacer>
         <v-btn icon>
