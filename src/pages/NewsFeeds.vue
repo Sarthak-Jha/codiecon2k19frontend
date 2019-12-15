@@ -56,15 +56,17 @@ export default {
                 apiParam: this.currentPage
             })
         }
-
     },
     computed: {
         ...mapGetters('searchStore',['getSearchResult']),
         totalPage () {
-            if (this.getSearchResult.totalElements%6 == 0) {
-                return this.getSearchResult.totalElements/6
+            if (this.getSearchResult) {
+                if (this.getSearchResult.totalElements%6 == 0) {
+                    return this.getSearchResult.totalElements/6
+                }
+                return this.getSearchResult.totalElements/6 + 1
             }
-            return this.getSearchResult.totalElements/6 + 1
+            return 1
         }
 
     },
@@ -74,30 +76,7 @@ export default {
     },
     data () {
         return {
-            currentPage: 1,
-            totalPage: 10,
-            posts : {
-                "postId": "0c52b8ed-c133-4361-93eb-4ff9146771f0",
-                "location": "string",
-                "title": "string",
-                "description": "string",
-                "postedBy": "2",
-                "category": "string",
-                "type": "SEEKER",
-                "createdTime": 1576255168280,
-                "lastUpdatedTime": 1576255168280,
-                "photoLinks": [
-                "string"
-                ],
-                "likeCounts": 0,
-                "commentsCounts": 0,
-                "posterFirstName": "string",
-                "posterLastName": "string",
-                "posterProfilePictureLink": null,
-                "status": "PENDING_APPROVAL",
-                "alreadyLiked": false,
-                "promoted": true
-            }
+            currentPage: 1
         }
     }
 
@@ -116,6 +95,7 @@ export default {
     align-self: center;
     &-left {
         flex-grow: 1;
+        max-width: 30vw;
     }
     &-right {
         flex-grow: 2;
@@ -132,8 +112,8 @@ export default {
     flex-wrap: wrap;
     justify-content: space-evenly; 
     &__single {
-        margin: 10px 30px;
-        min-width: 25vw;
+        margin: 5px 30px;
+        min-width: 28vw;
     }
 }
 .pagination {
