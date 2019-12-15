@@ -75,7 +75,7 @@
         data () {
             return {
                 state: "close",
-                login: false
+                login: true
             }
         },
         computed: {

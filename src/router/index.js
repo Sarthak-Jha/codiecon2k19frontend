@@ -9,6 +9,7 @@ import Groups from '../pages/Groups'
 import feedback from '../pages/FeedbackForm'
 import groupForm from '../pages/GroupForm'
 import postDetails from '../pages/PostDetails'
+import userdetail from '../pages/UserDetail'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
     path: '/postdetails',
     name: 'postDetails',
     component: postDetails
+  },
+  {
+    path: '/userdetail',
+    name: 'UserDetail',
+    component: userdetail
   }
 ]
 

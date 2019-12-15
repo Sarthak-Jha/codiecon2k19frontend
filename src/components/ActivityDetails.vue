@@ -1,41 +1,56 @@
 <template>
     <v-container fluid>
-
+        <section class="section-right">
+            <div class="section-right__sub">
+                <section class="cards">
+                    <div class="cards__single" v-for="post in 10" :key="post">
+                        <post-card :postData="post"></post-card>
+                    </div>
+                </section>
+                <section class="pagination" style="margin-top: 15px; margin-bottom: 10px;">
+                    <div class="text-center">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        circle
+                        ></v-pagination>
+                    </div>
+                </section>
+            </div>
+        </section>
     </v-container>
 </template>
 
 <script>
     import PostCard from "./PostCard";
-
+// To do CSS fix
     export default {
         name: "ActivitiesComponent",
         data: () => ({
-            messages: [
-                {
-                    avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                    name: 'John Leider',
-                    title: 'Welcome to Vuetify.js!',
-                    excerpt: 'Thank you for joining our community...',
-                },
-                {
-                    color: 'red',
-                    icon: 'people',
-                    name: 'Social',
-                    new: 1,
-                    total: 3,
-                    title: 'Twitter',
-                },
-                {
-                    color: 'teal',
-                    icon: 'local_offer',
-                    name: 'Promos',
-                    new: 2,
-                    total: 4,
-                    title: 'Shop your way',
-                    exceprt: 'New deals available, Join Today',
-                },
-            ],
-            lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
+            page: 1,
+            totalPage: 10,
+            posts : {
+                "postId": "0c52b8ed-c133-4361-93eb-4ff9146771f0",
+                "location": "string",
+                "title": "string",
+                "description": "string",
+                "postedBy": "2",
+                "category": "string",
+                "type": "SEEKER",
+                "createdTime": 1576255168280,
+                "lastUpdatedTime": 1576255168280,
+                "photoLinks": [
+                "string"
+                ],
+                "likeCounts": 0,
+                "commentsCounts": 0,
+                "posterFirstName": "string",
+                "posterLastName": "string",
+                "posterProfilePictureLink": null,
+                "status": "PENDING_APPROVAL",
+                "alreadyLiked": false,
+                "promoted": true
+            }
         }),
         components: {
             PostCard
@@ -43,8 +58,29 @@
     }
 </script>
 
-<style scoped>
-    .groupPannel{
+<style lang="scss" scoped>
+    .groupPannel {
         margin: 15px;
     }
+    .section {
+        &-right {
+            &__sub {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+    .cards {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly; 
+        &__single {
+            margin: 10px 10px;
+    }
+    .pagination {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+}
 </style>
