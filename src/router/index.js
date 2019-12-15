@@ -1,14 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Landing from '../pages/LandingPage.vue'
-import Profile from '../pages/Profile.vue'
-import newsfeeds from '../pages/NewsFeeds'
-import loginpage from '../pages/LoginPage'
-import register from '../pages/SignUp'
-import Groups from '../pages/Groups'
-import feedback from '../pages/FeedbackForm'
-import groupForm from '../pages/GroupForm'
-import postDetails from '../pages/PostDetails'
 import CreatePost from "../components/CreatePost"
 import PostForm from "../pages/Postform";
 

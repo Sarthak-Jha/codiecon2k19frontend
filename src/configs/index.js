@@ -1,61 +1,64 @@
 export default {
     api: { 
         base_path: {
-            auth: '10.177.68.18:8079/auth/api/v1',
+            auth: '10.177.68.18:8079',
             post: '10.177.68.18:8091/api/v1',
             solr: '10.177.68.18:8060/api/v1',
             base: '/api/v1',
         },
         users: {
-            login: '/login',
-            register: '/register',
-            logout: '/logout',
-            checkUsername: '/checkUsername',
-            session: '/session',
-            validate: '/validate'
+            login: '/auth/api/v1/login',
+            register: '/auth/api/v1/register',
+            logout: '/auth/api/v1/logout',
+            checkUsername: '/auth/api/v1/checkUsername',
+            session: '/auth/api/v1/session',
+            validate: '/auth/api/v1/validate'
         },
         posts: {
-            addPost: '/addPost',
+            addPost: '/api/v1/addPost',
             deletePost: function (postId) {
-                return '/post' + postId
+                return '/api/v1/post' + postId
             },
             addComment: function (postId) {
-                return `/post/${postId}/addComment`
+                return `/api/v1/post/${postId}/addComment`
             },
             closePost: function (postId) {
-                return `/post/${postId}/closePost`
+                return `/api/v1/post/${postId}/closePost`
             },
             getCommentsByPostId: function (postId) {
-                return `/post/${postId}/getCommentsByPostId`
+                return `/api/v1/post/${postId}/getCommentsByPostId`
             },
             addLike: function (postId) {
-                return `/post/${postId}/addLike`
+                return `/api/v1/post/${postId}/addLike`
             },
-            addGroup: '/post/addGroup',
+            addGroup: '/api/v1/post/addGroup',
             addMember: function (groupId) {
-                return '/post/addMember/' + groupId
+                return '/api/v1/post/addMember/' + groupId
             },
             addViewCount: function (postId) {
-                return '/post/addViewCount/' + postId
+                return '/api/v1/post/addViewCount/' + postId
             },
             deleteMember: function (groupId) {
-                return '/post/deleteMember/' + groupId
+                return '/api/v1/post/deleteMember/' + groupId
             },
-            getAllCategories: '/post/getAllCategories',
-            getAllGroups: '/post/getAllGroups',
-            getAllLocations: '/post/getAllLocations',
-            getAllTags: '/post/getAllTags',
+            getAllCategories: '/api/v1/post/getAllCategories',
+            getAllGroups: '/api/v1/post/getAllGroups',
+            getAllLocations: '/api/v1/post/getAllLocations',
+            getAllTags: '/api/v1/post/getAllTags',
             getFormFeilds: function (category) {
-                return '/post/getFormFeilds/' + category
+                return '/api/v1/post/getFormFeilds/' + category
             },
-            getGroupsByUser: '/post/getGroupsByUser',
-            setCategory: '/post/setCategory',
-            setForm: '/post/setForm',
-            getSelf: '/user/getSelf'
+            getGroupsByUser: '/api/v1/post/getGroupsByUser',
+            setCategory: '/api/v1/post/setCategory',
+            setForm: '/api/v1/post/setForm',
+            getSelf: '/api/v1/user/getSelf',
+            getUserDetails: function (userId) {
+                return '/api/v1/user/getUser' + userId
+            }
         },
         search: {
-            search: '/search',
-            userAutoComplete: '/userAutoComplete'
+            search: '/api/v1/search',
+            userAutoComplete: '/api/v1/userAutoComplete'
         }
 
     },
