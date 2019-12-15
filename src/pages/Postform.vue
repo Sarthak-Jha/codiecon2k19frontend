@@ -19,48 +19,40 @@
                             <v-textarea
                                     label="Description"
                             ></v-textarea>
-                            <v-text-field
+                            <v-select
+                                    :items="states"
                                     label="Location"
-                                    name="location"
-                                    type="text"
+                                    hide-details
                                     v-if="showLocationField()"
-                            ></v-text-field>
+                            ></v-select>
                             <v-text-field
                                     label="Price"
                                     name="price"
                                     type="numeric"
                                     v-if="showPriceField()"
                             ></v-text-field>
-                            <v-col>
-                                <v-select
-                                        v-model="value"
-                                        :items="items"
-                                        attach
-                                        chips
-                                        label="Post Type"
-                                        multiple
-                                ></v-select>
-                            </v-col>
-                            <v-col>
-                                <v-select
-                                        v-model="value"
-                                        :items="items"
-                                        attach
-                                        chips
-                                        label="Tags"
-                                        multiple
-                                ></v-select>
-                            </v-col>
-                            <v-list-item>
-                                <v-file-input
-                                        :rules="rules"
-                                        accept="image/png, image/jpeg, image/bmp"
-                                        placeholder="Pick a group icon"
-                                        prepend-icon="mdi-camera"
-                                        label="Icon"
-                                        v-if="showImageField()"
-                                ></v-file-input>
-                            </v-list-item>
+                            <v-select
+                                    v-model="value"
+                                    :items="postTypeList"
+                                    attach
+                                    label="Post Type"
+                            ></v-select>
+                            <v-select
+                                    v-model="value"
+                                    :items="items"
+                                    attach
+                                    chips
+                                    label="Tags"
+                                    multiple
+                            ></v-select>
+                            <v-file-input
+                                    :rules="rules"
+                                    accept="image/png, image/jpeg, image/bmp"
+                                    placeholder="Pick a Image for your post"
+                                    prepend-icon="mdi-camera"
+                                    label="Icon"
+                                    v-if="showImageField()"
+                            ></v-file-input>
                             <v-list-item @click="">
                                 <v-menu
                                         ref="menu"
@@ -144,11 +136,18 @@ export default {
             ],
             postTitle: '',
             postDescription: '',
-
+            postLocation: '',
+            postPrice: '',
+            postTypeList1: ['BUY', 'SELL', 'RENT'],
+            postTypeList2: ['ACTIVITY', 'SEEKER', 'CONTRIBUTOR', 'OTHER'],
+            postTypeList3:['DISCUSSION', 'OTHER'],
+            postTypeList4: ['OTHER'],
+            postTags: [],
+            postTypeList: []
         }
     },
     computed: {
-      ...mapGetters('postStore',['selectedCategory'])
+      ...mapGetters('postStore',['selectedCategory',''])
     },
     methods: {
         showLocationField () {
@@ -175,6 +174,18 @@ export default {
             if(this.selectedCategory === 'Activities Form') {
                 return true
             }
+        }
+    },
+    mounted() {
+        console.log("newewew")
+        if(this.selectedCategory === 'Accomodation Form' || this.selectedCategory === 'Electronics Form' || this.selectedCategory === 'Household Form' ||this.selectedCategory === 'Vehicles Form') {
+            this.postTypeList = this.postTypeList1
+        } else if(this.selectedCategory === 'Activities Form') {
+            this.postTypeList = this.postTypeList2
+        } else if(this.selectedCategory === 'Discussion Form') {
+            this.postTypeList = this.postTypeList3
+        } else {
+            this.postTypeList = this.postTypeList4
         }
     }
 }
