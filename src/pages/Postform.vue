@@ -180,27 +180,27 @@ export default {
         ...mapActions('postStore', ['getUploadLinkImage','submitPostForm']),
         ...mapActions('searchStore', ['makeSearch']),
         showLocationField () {
-            if(this.selectedCategory !== 'Discussion' && this.selectedCategory !== 'Miscllaneous') {
+            if(this.selectedCategory.categoryName !== 'Discussion' && this.selectedCategory.categoryName !== 'Miscllaneous') {
                 return true
             }
         },
         showPriceField () {
-            if(this.selectedCategory !== 'Discussion' && this.selectedCategory !== 'Miscllaneous') {
+            if(this.selectedCategory.categoryName !== 'Discussion' && this.selectedCategory.categoryName !== 'Miscllaneous') {
                 return true
             }
         },
         showImageField () {
-            if(this.selectedCategory !== 'Activities' && this.selectedCategory !== 'Miscllaneous') {
+            if(this.selectedCategory.categoryName !== 'Activities' && this.selectedCategory.categoryName !== 'Miscllaneous') {
                 return true
             }
         },
         showStartDateField () {
-            if(this.selectedCategory === 'Activities') {
+            if(this.selectedCategory.categoryName === 'Activities') {
                 return true
             }
         },
         showEndDateField () {
-            if(this.selectedCategory === 'Activities') {
+            if(this.selectedCategory.categoryName === 'Activities') {
                 return true
             }
         },

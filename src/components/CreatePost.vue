@@ -2,7 +2,7 @@
     <section class="paragraph">
         Select Category
         <section class="cards" >
-            <div class="text-center"  v-for="tag in getAllCategories" :key="tag">
+            <div class="text-center"  v-for="tag in getAllCategories" :key="tag.categoryId">
                 <category-page :category="tag">
                 </category-page>
             </div>
@@ -12,17 +12,10 @@
 
 <script>
     import categoryPage from './CategoryPage'
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapGetters} from 'vuex'
 
     export default {
         name: "CreatePost",
-        data () {
-            return {
-                tags: [
-                    'Accomodation Form', 'Electronics Form', 'Household Form', 'Vehicles Form', 'Activities Form', 'Discussion Form', 'Miscllaneous Form'
-                ]
-            }
-        },
         components: {
             categoryPage
         },

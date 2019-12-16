@@ -2,8 +2,6 @@
     <v-card
             class="mx-auto"
             min-width="200"
-
-            @click="selectedCategory(category)"
     >
         <router-link class="link" to="/postform">
             <v-img
@@ -11,6 +9,7 @@
                     height="150px"
                     width= "300px"
                     :src="category.categoryImage"
+                    @click="selectedCategory(category)"
             >
             </v-img>
             <v-card-title class="cardTitle">{{category.categoryName}}</v-card-title>
@@ -42,6 +41,7 @@
         methods: {
             ...mapActions('postStore',['selectCategory','setAllPostType']),
             selectedCategory (id) {
+                console.log(id)
                 this.selectCategory(id)
                 if(id.categoryName === 'Accomodation' || id.categoryName === 'Electronics' || id.categoryName === 'HouseHold' || id.categoryName === 'Vehicles') {
                     this.postTypeList = this.postTypeList1
