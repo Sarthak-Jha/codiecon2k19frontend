@@ -26,10 +26,10 @@ export default {
                 return `:8091/post/api/v1/post/${postId}/closePost`
             },
             getCommentsByPostId: function (postId) {
-                return `:8091/post/api/v1/post/${postId}/getCommentsByPostId`
+                return `:8091/post/api/v1/post/${postId}/getComments`
             },
-            addLike: function (postId) {
-                return `:8091/post/api/v1/post/${postId}/addLike`
+            addLike: function (data) {
+                return `:8091/post/api/v1/post/${data.postId}/like?forLike=` + data.forLike
             },
             addGroup: ':8091/post/api/v1/post/addGroup',
             addMember: function (groupId) {
@@ -56,8 +56,11 @@ export default {
             getUserDetails: function (userId) {
                 return ':8091/post/api/v1/user/getUser' + userId
             },
-            imageUpload (data) {
-              return ':8091/post/image/upload?fileType='+ data.fileType + '&type=' + data.type
+            imageUpload(data) {
+                return ':8091/post/image/upload?fileType=' + data.fileType + '&type=' + data.type
+            },
+            getPost(data) {
+                return ':8091/post/api/v1/getPost/' + data.postId
             }
         },
         search: {

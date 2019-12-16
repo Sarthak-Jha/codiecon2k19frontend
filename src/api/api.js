@@ -21,17 +21,17 @@ export default {
     deletePost (cb, data, errHandler, headerParams, apiParam) {
         httpApi.deleteDataViaApi(config.api.posts.deletePost(apiParam), cb, data, errHandler, headerParams)
     },
-    addComment (cb, data, errHandler, headerParams, apiParam) {
-        httpApi.postDataViaApi(config.api.posts.addComment(apiParam), cb, data, errHandler, headerParams)
+    addComment (cb, data, errHandler, headerParams) {
+        httpApi.postDataViaApi(config.api.posts.addComment(data.postId), cb, data, errHandler, headerParams)
     },
     closePost (cb, data, errHandler, headerParams, apiParam) {
         httpApi.putDataViaApi(config.api.posts.closePost(apiParam), cb, data, errHandler, headerParams)
     },
-    getCommentsByPostId (cb, data, errHandler, headerParams, apiParam) {
-        httpApi.getDataViaApi(config.api.posts.getCommentsByPostId(apiParam), cb, data, errHandler, headerParams)
+    getCommentsByPostId (cb, data, errHandler, headerParams) {
+        httpApi.getDataViaApi(config.api.posts.getCommentsByPostId(data.postId), cb, data, errHandler, headerParams)
     },
-    addLike (cb, data, errHandler, headerParams, apiParam) {
-        httpApi.putDataViaApi(config.api.posts.addLike(apiParam), cb, data, errHandler, headerParams)
+    addLike (cb, data, errHandler, headerParams) {
+        httpApi.putDataViaApi(config.api.posts.addLike(data), cb, data, errHandler, headerParams)
     },
     addGroup (cb, data, errHandler, headerParams) {
         httpApi.postDataViaApi(config.api.posts.addGroup, cb, data, errHandler, headerParams)
@@ -90,5 +90,8 @@ export default {
     },
     userList(cb,errHandler) {
 	    httpApi.getDataViaApi(config.api.search.userAutoComplete, cb, errHandler)
+    },
+    getPost(cb, data, errHandler, headerParams) {
+	    httpApi.getDataViaApi(config.api.posts.getPost(data), cb, data, errHandler, headerParams)
     }
 };
