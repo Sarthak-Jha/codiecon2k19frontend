@@ -63,7 +63,6 @@ export const actions = {
         })
     },
     allGroupsByUser ({commit}, {data, success,fail}) {
-        debugger
         MainApi.getGroupsByUser( (res) => {
             commit('setAllGroupsByUser', res.body.responseObject)
             success && success(res)
