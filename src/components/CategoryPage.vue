@@ -3,7 +3,7 @@
             class="mx-auto"
             min-width="200"
 
-            @click="selectedCategory(category.categoryName)"
+            @click="selectedCategory(category)"
     >
         <router-link class="link" to="/postform">
             <v-img
@@ -43,11 +43,11 @@
             ...mapActions('postStore',['selectCategory','setAllPostType']),
             selectedCategory (id) {
                 this.selectCategory(id)
-                if(id === 'Accomodation' || id === 'Electronics' || id === 'HouseHold' || id === 'Vehicles') {
+                if(id.categoryName === 'Accomodation' || id.categoryName === 'Electronics' || id.categoryName === 'HouseHold' || id.categoryName === 'Vehicles') {
                     this.postTypeList = this.postTypeList1
-                } else if(id === 'Activities') {
+                } else if(id.categoryName === 'Activities') {
                     this.postTypeList = this.postTypeList2
-                } else if(id === 'Discussion') {
+                } else if(id.categoryName === 'Discussion') {
                     this.postTypeList = this.postTypeList3
                 } else {
                     this.postTypeList = this.postTypeList4

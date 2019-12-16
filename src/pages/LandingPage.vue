@@ -2,10 +2,11 @@
     <main>
         <div class="parallax">
             <section class="welcome">
-                <input class="welcome__search" type="text" placeholder="What are you upto today?">
+                <input class="welcome__search" type="text" placeholder="What are you upto today?" v-model="searchTerm">
+                <v-btn class="welcome__button" @click="searchNews()">Search</v-btn>
             </section>
             <section class="paragraph">
-                Some of the Popular Categories to look into...
+                Here Are our Categories
                 <section class="cards">
                     <div v-if="getAllCategories.length" class="text-center" v-for="category in categories" :key="category.categoryId">
                         <activitycard :category="category" @clicked="selectedCategory">
@@ -71,7 +72,8 @@ export default {
                 'index': 6,
                 'heading': 'And More to Come...',
                 'desc' : 'We promise to keep on addding more services on discussion board...',
-            }]
+            }],
+            searchTerm: ''
         }
     },
     watch: {
@@ -106,6 +108,9 @@ export default {
             this.$router.push({ path: 'newsfeeds', query: { category : 'category' }})
         },
         fail () {
+
+        },
+        searchNews () {
 
         }
     },
@@ -159,11 +164,14 @@ export default {
         opacity: 0.9;
         background-color: #ffffff;
         filter: alpha(opacity=60);
-        border-radius: 30px;
         text-align:center;
         min-height: 50px;
         min-width: 550px;
         outline: none;
+    }
+    &__button{
+        margin-left: 20px;
+        min-height: 50px;
     }
 }
 .paragraph {

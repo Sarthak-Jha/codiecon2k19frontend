@@ -63,7 +63,7 @@ export default {
             search: function (pageNumber){
                 return `:8060/search/api/v1/search?pageNumber=${pageNumber}&pageSize=6`
             },
-            userAutoComplete: ':8060/search/api/v1/userAutoComplete'
+            userAutoComplete: ':8060/search/api/v1/userAutoComplete?search=%20&totalSize=20'
         }
 
     },

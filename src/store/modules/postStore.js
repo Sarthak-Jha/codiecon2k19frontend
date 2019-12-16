@@ -94,6 +94,16 @@ export const actions = {
         }, data, (res) => {
             fail && fail(res)
         },headers)
+    },
+    submitGroupForm ({commit}, {data, head, success, fail}) {
+        let headers = {
+            Authorization: 'Bearer ' + head.token
+        }
+        MainApi.addGroup( (res) => {
+            success && success(res)
+        }, data, (res) => {
+            fail && fail(res)
+        }, headers)
     }
 }
 

@@ -5,7 +5,7 @@
                     class="postForm__header"
                     dark
             >
-                <v-toolbar-title>{{ this.selectedCategory }}</v-toolbar-title>
+                <v-toolbar-title>{{ this.selectedCategory.categoryName}}</v-toolbar-title>
             </v-toolbar>
             <v-list>
                 <v-list-item>
@@ -26,6 +26,7 @@
                                     label="Location"
                                     hide-details
                                     item-text="name"
+                                    item-value="id"
                                     v-model="postLocation"
                                     v-if="showLocationField()"
                             ></v-select>
@@ -62,7 +63,9 @@
                                     v-if="showImageField()"
                             ></v-file-input>
                             <v-btn color="primary" @click="onUpload" v-if="showImageField()">Upload</v-btn>
-                            <v-list-item @click="">
+                            <v-list-item @click=""
+                                 v-if="showStartDateField()"
+                            >
                                 <v-menu
                                         ref="menu"
                                         v-model="menu"
@@ -71,7 +74,6 @@
                                         offset-y
                                         full-width
                                         min-width="290px"
-                                        v-if="showStartDateField()"
                                 >
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
@@ -89,8 +91,9 @@
                                     ></v-date-picker>
                                 </v-menu>
                             </v-list-item>
-
-                            <v-list-item @click="">
+                            <v-list-item @click=""
+                                 v-if="showEndDateField()"
+                            >
                                 <v-menu
                                         ref="menu"
                                         v-model="menu"
@@ -99,7 +102,6 @@
                                         offset-y
                                         full-width
                                         min-width="290px"
-                                        v-if="showEndDateField()"
                                 >
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
@@ -117,10 +119,22 @@
                                     ></v-date-picker>
                                 </v-menu>
                             </v-list-item>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="primary" @click="submitForm()">Submit</v-btn>
-                            </v-card-actions>
+                            <v-list-item></v-list-item>
+                            <v-row justify="center">
+                                <v-dialog v-model="dialog" persistent max-width="290">
+                                    <template v-slot:activator="{ on }">
+                                        <v-btn color="primary" dark v-on="on">Submit</v-btn>
+                                    </template>
+                                    <v-card>
+                                        <v-card-title class="headline">Are You Sure?</v-card-title>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn color="green darken-1" text @click="dialog = false">No</v-btn>
+                                            <v-btn color="green darken-1" text @click="submitForm()">Yes</v-btn>
+                                        </v-card-actions>
+                                    </v-card>
+                                </v-dialog>
+                            </v-row>
                         </v-form>
                     </v-card-text>
                 </v-list-item>
@@ -154,7 +168,9 @@ export default {
                 file: null,
                 fileType: '',
                 type: ''
-            }
+            },
+            dialog: false,
+            currentPage: 1
         }
     },
     computed: {
@@ -162,6 +178,7 @@ export default {
     },
     methods: {
         ...mapActions('postStore', ['getUploadLinkImage','submitPostForm']),
+        ...mapActions('searchStore', ['makeSearch']),
         showLocationField () {
             if(this.selectedCategory !== 'Discussion' && this.selectedCategory !== 'Miscllaneous') {
                 return true
@@ -199,7 +216,6 @@ export default {
             this.newData.fileType = this.file.type
             this.newData.type = this.file.type
             let data = this.newData
-            debugger
             this.getUploadLinkImage({
                 data,
                 success: this.saveUploadLink,
@@ -210,10 +226,10 @@ export default {
             this.postImageUrl = res.body.uploadLink
         },
         submitForm () {
-            if(this.selectedCategory === 'Accomodation' || this.selectedCategory === 'Electronics' || this.selectedCategory === 'HouseHold' || this.selectedCategory === 'Vehicles') {
+            if(this.selectedCategory.categoryName === 'Accomodation' || this.selectedCategory.categoryName === 'Electronics' || this.selectedCategory.categoryName === 'HouseHold' || this.selectedCategory.categoryName === 'Vehicles') {
                 let photo = this.postImageUrl.split(",")
                 let data = {
-                    category: this.selectedCategory,
+                    category: this.selectedCategory.categoryId,
                     title: this.postTitle,
                     description: this.postDescription,
                     location: this.postLocation,
@@ -226,11 +242,11 @@ export default {
                     token: this.$session.get('token')
                 }
                 this.submitPostForm({data, head})
-            } else if(this.selectedCategory === 'Activities') {
+            } else if(this.selectedCategory.categoryName === 'Activities') {
                 let startEpoch = new Date(this.postStartDate).getTime()
                 let endEpoch = new Date(this.postEndDate).getTime()
                 let data = {
-                    category: this.selectedCategory,
+                    category: this.selectedCategory.categoryId,
                     title: this.postTitle,
                     description: this.postDescription,
                     location: this.postLocation,
@@ -244,10 +260,10 @@ export default {
                     token: this.$session.get('token')
                 }
                 this.submitPostForm({data, head})
-            } else if(this.selectedCategory === 'Discussion') {
+            } else if(this.selectedCategory.categoryName === 'Discussion') {
                 let photo = this.postImageUrl.split(",")
                 let data = {
-                    category: this.selectedCategory,
+                    category: this.selectedCategory.categoryId,
                     title: this.postTitle,
                     description: this.postDescription,
                     type: this.postType,
@@ -260,7 +276,7 @@ export default {
                 this.submitPostForm({data, head, success: this.emptyFields()})
             } else {
                 let data = {
-                    category: this.selectedCategory,
+                    category: this.selectedCategory.categoryId,
                     title: this.postTitle,
                     description: this.postDescription,
                     type: this.postType,
@@ -271,6 +287,19 @@ export default {
                 }
                 this.submitPostForm({data, head})
             }
+            if (!this.$route.query.category) {
+                let data = {
+                    'category' : 'all'
+                }
+                this.makeSearch({
+                    data,
+                    success: this.success,
+                    fail: this.fail,
+                    apiParam: this.currentPage
+                })
+            }
+            this.dialog = false
+            this.$router.push('/newsfeeds')
         },
         emptyFields() {
             this.postTitle = '',

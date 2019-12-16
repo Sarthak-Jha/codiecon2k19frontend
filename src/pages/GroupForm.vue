@@ -13,7 +13,11 @@
                             placeholder="Pick a group icon"
                             prepend-icon="mdi-camera"
                             label="Icon"
+                            v-model="file"
+                            @change="saveImage()"
                         ></v-file-input>
+                        <v-spacer></v-spacer>
+                        <v-btn color="primary" @click="onUpload">Upload</v-btn>
                     </v-list-item>
                     <v-list-item>
                         <v-card-text>
@@ -22,37 +26,27 @@
                                     label="Group Name"
                                     name="groupname"
                                     type="text"
+                                    v-model="groupName"
                                 ></v-text-field>
                             </v-form>
                         </v-card-text>
                     </v-list-item>
                     <v-list-item>
-                        <v-combobox
-                            v-model="chips"
-                            :items="items"
-                            chips
-                            clearable
-                            label="Enter Groups Members"
-                            multiple
-                            solo
-                        >
-                            <template v-slot:selection="{ attrs, item, select, selected }">
-                                <v-chip
-                                    v-bind="attrs"
-                                    :input-value="selected"
-                                    close
-                                    @click="select"
-                                    @click:close="remove(item)"
-                                >
-                                    <strong>{{ item }}</strong>&nbsp;
-                                </v-chip>
-                            </template>
-                        </v-combobox>
+                        <v-select
+                                v-model="groupMembers"
+                                :items="getUserList"
+                                attach
+                                chips
+                                item-text="userName"
+                                item-value="userId"
+                                label="Tags"
+                                multiple
+                        ></v-select>
                     </v-list-item>
                     <v-list-item>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary">Submit</v-btn>
+                            <v-btn color="primary" @click="submitForm()">Submit</v-btn>
                         </v-card-actions>
                     </v-list-item>
                 </v-list>
@@ -62,6 +56,7 @@
 </template>
 
 <script>
+    import { mapGetters, mapActions } from 'vuex'
 export default {
     name: 'groupForm',
     data () {
@@ -69,8 +64,57 @@ export default {
             rules: [
                 value => !value || value.size < 2000000 || 'Avatar size should be less than 2 MB!',
             ],
-            chips: [],
-            items: []
+            file: null,
+            imageUrl: null,
+            newData: {
+                file: null,
+                fileType: '',
+                type: ''
+            },
+            groupImageURl: '',
+            groupMembers: [],
+            groupName: ''
+        }
+    },
+    computed: {
+        ...mapGetters('userStore', ['userSelfDetails']),
+        ...mapGetters('searchStore', ['getUserList'])
+    },
+    methods: {
+        ...mapActions('postStore', ['getUploadLinkImage', 'submitGroupForm']),
+        saveImage() {
+            let reader = new FileReader()
+            reader.onload = () => {
+                this.imageUrl = reader.result
+            }
+            reader.readAsDataURL(this.file)
+        },
+        onUpload() {
+            this.newData.file = this.file
+            this.newData.fileType = this.file.type
+            this.newData.type = this.file.type
+            let data = this.newData
+            this.getUploadLinkImage({
+                data,
+                success: this.saveUploadLink,
+                fail: this.saveUploadFail
+            })
+        },
+        saveUploadLink (res) {
+            this.groupImageURl = res.body.uploadLink
+        },
+        submitForm () {
+            console.log(this.groupImageURl)
+            let data = {
+                creatorId: this.userSelfDetails.userId,
+                groupName: this.groupName,
+                groupImage: this.groupImageURl,
+                groupMemberList: this.groupMembers,
+            }
+            let head = {
+                token: this.$session.get('token')
+            }
+            this.submitGroupForm({data, head})
         }
     }
 }
