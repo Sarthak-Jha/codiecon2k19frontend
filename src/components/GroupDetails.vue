@@ -27,7 +27,7 @@
                                         size="40px"
                                 >
                                     <img
-                                            v-if="message.avatar"
+                                            v-if="AllGroupsByUser.groupImage"
                                             alt="Avatar"
                                             :src="getAllGroupsByUser.groupImage"
                                     >
@@ -43,7 +43,7 @@
                                     sm="5"
                                     md="3"
                             >
-                                <strong v-html="message.name"></strong>
+                                <strong v-html="AllGroupsByUser.groupName"></strong>
                             </v-col>
                         </v-row>
                     </v-expansion-panel>
@@ -67,8 +67,15 @@
         computed: {
             ...mapGetters('postStore',['getAllGroupsByUser'])
         },
+        methods: {
+            ...mapActions('searchStore', ['fetchUserList'])
+        },
         mounted () {
             console.log('allah',this.getAllGroupsByUser)
+            let data = {
+                searchTerm: ''
+            }
+            this.fetchUserList({data})
         }
 
     }

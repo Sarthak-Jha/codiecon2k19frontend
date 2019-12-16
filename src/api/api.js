@@ -84,5 +84,8 @@ export default {
     },
     search (cb, data, errHandler, apiParam) {
         httpApi.postDataViaApi(config.api.search.search(apiParam), cb, data, errHandler)
+    },
+    userList(cb,errHandler) {
+	    httpApi.getDataViaApi(config.api.search.userAutoComplete, cb, errHandler)
     }
 };

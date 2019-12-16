@@ -124,9 +124,9 @@ export default {
                 this.fetchUserDetails({
                     data
                 })
-                // this.allGroupsByUser({
-                //     data
-                // })
+                this.allGroupsByUser({
+                    data
+                })
                 this.$router.push('/')
             } else {
                 this.$store.commit('userStore/isLoggedIn', false);
