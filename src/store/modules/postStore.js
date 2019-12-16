@@ -189,6 +189,7 @@ export const getters = {
         return state.selectedCategory
     },
     getAllCategories (state) {
+        console.log(state.allCategories)
         return state.allCategories
     },
     getAllGroupsByUser (state) {
