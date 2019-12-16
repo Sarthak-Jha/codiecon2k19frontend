@@ -72,8 +72,8 @@ export default {
     setForm (cb, data, errHandler, headerParams) {
         httpApi.postDataViaApi(config.api.posts.setForm, cb, data, errHandler, headerParams)
     },
-    getUserDetails (cb, errHandler, headerParams, apiParam) {
-        httpApi.getDataViaApi(config.api.posts.getUserDetails(apiParam), cb, errHandler, headerParams)
+    getUserDetails (cb, errHandler, headerParams, apiParams) {
+        httpApi.getDataViaApi(config.api.posts.getUserDetails(apiParams), cb, errHandler, headerParams)
     },
     getSelf (cb, data, errHandler, headerParams) {
         httpApi.getDataViaApi(config.api.posts.getSelf, cb, data, errHandler, headerParams)

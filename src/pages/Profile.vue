@@ -16,7 +16,8 @@
                             >
                                 <v-img class="profile__pic" src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"></v-img>
                             </v-avatar>
-                            <div class="subheading">{{fullname}}</div>
+                            <div class="subheading" v-if="self">{{fullname}}</div>
+                            <div class="subheading" v-else>{{fullnameO}}</div>
                         </v-col>
                     </v-row>
                 </v-img>
@@ -63,9 +64,19 @@
         },
         computed:{
             ...mapGetters('userStore',['userSelfDetails']),
+            ...mapGetters('postStore',['getTheUserById']),
             fullname () {
                 console.log("hss", this.userSelfDetails)
                 return this.userSelfDetails.firstName + ' ' + this.userSelfDetails.lastName
+            },
+            fullnameO () {
+                return this.getTheUserById.firstName + ' ' + this.getTheUserById.lastName
+            },
+            self () {
+                if(this.$route.query.userId) {
+                    return false
+                }
+                return true
             }
         },
         methods: {
