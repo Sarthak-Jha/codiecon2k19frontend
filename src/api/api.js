@@ -57,6 +57,9 @@ export default {
     getAllLocations (cb, data, errHandler) {
         httpApi.getDataViaApi(config.api.posts.getAllLocations, cb, data, errHandler)
     },
+    getAllTypes (cb, data, errHandler) {
+        httpApi.getDataViaApi(config.api.posts.getAllTypes, cb, data, errHandler)
+    },
     getFormFeilds (cb, data, errHandler, headerParams, apiParam) {
         httpApi.getDataViaApi(config.api.posts.getFormFeilds(apiParam), cb, data, errHandler, headerParams)
     },
@@ -69,8 +72,8 @@ export default {
     setForm (cb, data, errHandler, headerParams) {
         httpApi.postDataViaApi(config.api.posts.setForm, cb, data, errHandler, headerParams)
     },
-    getUserDetails (cb, data, errHandler, headerParams, apiParam) {
-        httpApi.getDataViaApi(config.api.posts.getUserDetails(apiParam), cb, data, errHandler, headerParams)
+    getUserDetails (cb, errHandler, headerParams, apiParam) {
+        httpApi.getDataViaApi(config.api.posts.getUserDetails(apiParam), cb, errHandler, headerParams)
     },
     getSelf (cb, data, errHandler, headerParams) {
         httpApi.getDataViaApi(config.api.posts.getSelf, cb, data, errHandler, headerParams)

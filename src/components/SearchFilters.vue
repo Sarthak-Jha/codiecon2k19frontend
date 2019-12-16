@@ -12,57 +12,35 @@
                                 <v-list-item-title>Sort By </v-list-item-title>
                             </v-list-item-content>
                     </v-list-item>
-
                     <v-list-item>
-                        <v-switch v-model="filters" label="LATEST" value="LATEST"></v-switch>
+                        <v-radio-group v-model="filters">
+                            <v-radio  label="LATEST" value="LATEST"></v-radio>
+                            <v-radio  label="POPULAR" value="POPULAR"></v-radio>
+                            <v-radio  label="ACTIVE" value="ACTIVE"></v-radio>
+                            <v-radio  label="PRICE" value="PRICE"></v-radio>
+                        </v-radio-group>
                     </v-list-item>
-
-                    <v-list-item>
-                        <v-switch v-model="filters" label="POPULAR" value="POPULAR"></v-switch>
-                    </v-list-item>
-
-                    <v-list-item>
-                        <v-switch v-model="filters" label="ACTIVE" value="ACTIVE"></v-switch>
-                    </v-list-item>
-
-                    <v-list-item>
-                        <v-switch v-model="filters" label="PRICE" value="PRICE"></v-switch>
-                    </v-list-item>
-
                     <v-divider></v-divider>
 
-                    <v-list-item>
+                    <!-- <v-list-item>
                             <v-list-item-content>
                                 <v-list-item-title>Filter By Groups</v-list-item-title>
                             </v-list-item-content>
                     </v-list-item>
 
                     <v-list-item>
-                        <v-combobox
-                            v-model="chips"
-                            :items="items"
+                        <v-select
+                            v-model="groups"
+                            :items="getAllGroupsByUser"
+                            attach
                             chips
-                            clearable
-                            label="Enter Groups"
+                            item-text="tagName"
+                            label="Groups"
                             multiple
-                            solo
-                        >
-                            <template v-slot:selection="{ attrs, item, select, selected }">
-                                <v-chip
-                                    v-bind="attrs"
-                                    :input-value="selected"
-                                    close
-                                    @click="select"
-                                    @click:close="remove(item)"
-                                >
-                                    <strong>{{ item }}</strong>&nbsp;
-                                    <span>(Group)</span>
-                                </v-chip>
-                            </template>
-                        </v-combobox>
-                    </v-list-item>
+                        ></v-select>
+                    </v-list-item> -->
 
-                    <v-divider></v-divider>
+                    <!-- <v-divider></v-divider> -->
 
                     <v-list-item>
                             <v-list-item-content>
@@ -70,29 +48,16 @@
                             </v-list-item-content>
                     </v-list-item>
 
-                    <v-list-item cols="12" sm="12" offset-sm="0">
-                        <v-combobox
-                            v-model="chips"
-                            :items="items"
+                    <v-list-item>
+                        <v-select
+                            v-model="category"
+                            :items="getAllCategories"
+                            attach
                             chips
-                            clearable
-                            label="Enter Categories"
-                            multiple
-                            solo
-                        >
-                            <template v-slot:selection="{ attrs, item, select, selected }">
-                                <v-chip
-                                    v-bind="attrs"
-                                    :input-value="selected"
-                                    close
-                                    @click="select"
-                                    @click:close="remove(item)"
-                                >
-                                    <strong>{{ item }}</strong>&nbsp;
-                                    <span>(Categorie)</span>
-                                </v-chip>
-                            </template>
-                        </v-combobox>
+                            item-text="categoryName"
+                            label="Categories"
+                        ></v-select>
+
                     </v-list-item>
 
                     <v-divider></v-divider>
@@ -103,29 +68,16 @@
                             </v-list-item-content>
                     </v-list-item>
 
-                    <v-list-item cols="12" sm="12" offset-sm="0"> 
-                        <v-combobox
-                            v-model="chips"
-                            :items="items"
+                    <v-list-item>
+                        <v-select
+                            v-model="postType"
+                            :items="getAllType"
+                            attach
                             chips
-                            clearable
-                            label="Enter Post Type"
-                            multiple
-                            solo
-                        >
-                            <template v-slot:selection="{ attrs, item, select, selected }">
-                                <v-chip
-                                    v-bind="attrs"
-                                    :input-value="selected"
-                                    close
-                                    @click="select"
-                                    @click:close="remove(item)"
-                                >
-                                    <strong>{{ item }}</strong>&nbsp;
-                                    <span>(Post Type)</span>
-                                </v-chip>
-                            </template>
-                        </v-combobox>
+                            item-text="tagName"
+                            label="Post Type"
+                        ></v-select> 
+
                     </v-list-item>
 
                     <v-divider></v-divider>
@@ -138,29 +90,36 @@
                             </v-list-item-content>
                     </v-list-item>
 
-                    <v-list-item cols="12" sm="12" offset-sm="0">
-                        <v-combobox
-                            v-model="chips"
-                            :items="items"
+                    <v-list-item>
+                        <v-select
+                            v-model="postTags"
+                            :items="getAllTags"
+                            attach
                             chips
-                            clearable
-                            label="Enter Tags"
+                            item-text="tagName"
+                            label="Tags"
                             multiple
-                            solo
-                        >
-                            <template v-slot:selection="{ attrs, item, select, selected }">
-                                <v-chip
-                                    v-bind="attrs"
-                                    :input-value="selected"
-                                    close
-                                    @click="select"
-                                    @click:close="remove(item)"
-                                >
-                                    <strong>{{ item }}</strong>&nbsp;
-                                    <span>(Tags)</span>
-                                </v-chip>
-                            </template>
-                        </v-combobox>
+                        ></v-select>
+                    </v-list-item>
+
+                    <v-divider></v-divider>
+
+                    <v-list-item>
+                            <v-list-item-content>
+                                <v-list-item-title>Filter By Location</v-list-item-title>
+                            </v-list-item-content>
+                    </v-list-item>
+
+                    <v-list-item>
+                        <v-select
+                            v-model="location"
+                            :items="getAllLocations"
+                            attach
+                            chips
+                            item-text="name"
+                            label="Locations"
+                        ></v-select>
+
                     </v-list-item>
 
                     <v-divider></v-divider>
@@ -172,7 +131,7 @@
                     </v-list-item>
                     <v-list-item @click="">
                         <v-menu
-                            v-model="menu"
+                            v-model="startMenu"
                             :close-on-content-click="false"
                             :nudge-right="40"
                             transition="scale-transition"
@@ -181,19 +140,19 @@
                         >
                             <template v-slot:activator="{ on }">
                             <v-text-field
-                                v-model="date"
-                                :label="labelNameStart"
+                                v-model="startDate"
+                                label='From'
                                 readonly
                                 v-on="on"
                             ></v-text-field>
                             </template>
-                            <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+                            <v-date-picker v-model="startDate" @input="startMenu = false"></v-date-picker>
                         </v-menu>
                     </v-list-item>
 
                     <v-list-item @click="">
                         <v-menu
-                            v-model="menu1"
+                            v-model="endMenu"
                             :close-on-content-click="false"
                             :nudge-right="40"
                             transition="scale-transition"
@@ -202,13 +161,13 @@
                         >
                             <template v-slot:activator="{ on }">
                             <v-text-field
-                                v-model="date"
-                                :label="labelNameEnd"
+                                v-model="endDate"
+                                label='To'
                                 readonly
                                 v-on="on"
                             ></v-text-field>
                             </template>
-                            <v-date-picker v-model="date" @input="menu1 = false"></v-date-picker>
+                            <v-date-picker v-model="endDate" @input="endMenu = false"></v-date-picker>
                         </v-menu>
                     </v-list-item>
 
@@ -221,29 +180,192 @@
 
 <script>
 import DatePicker from './DatePicker'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'searchFilters',
     components: {
         DatePicker
     },
+    computed: {
+        ...mapGetters('postStore',{
+            getAllTags :'getAllTags',
+            getAllCategories: 'getAllCategories',
+            getAllLocations: 'getAllLocations',
+            getAllGroupsByUser: 'getAllGroupsByUser', 
+            getAllType: 'getAllType'
+        }),
+        computedEndTime () {
+            return null
+        },
+        computedStartTime () {
+            return null
+        }
+
+    },
+    created () {
+        // this.allCategories({}),
+        // this.allLocations({}),
+        // this.allTags({}),
+        // this.fetchAllTypes({})
+    },
+    mounted () {
+        this.getAllCategories.unshift({
+            "categoryId": "ALL",
+            "categoryImage": "string",
+            "categoryName": "ALL",
+            "isFeatured": true
+        })
+        this.getAllType.unshift("ALL")
+        this.getAllLocations.unshift({
+            "id": "ALL",
+            "name": "ALL"
+        })
+    },
+    watch: {
+        filters () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        category () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        location () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        postType () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        postTags () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        startTime () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        endTime () {
+            let data = {
+                'sortType': this.filters,
+                'category': this.category,
+                'location': this.location,
+                'postType': this.postType,
+                'tag': this.postTags,
+                'startTime': this.computedStartTime,
+                'endTime': this.computedEndTime
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        }
+
+    },
     data () {
         return {
-            date: new Date().toISOString().substr(0, 10),
-            menu: false,
-            menu1: false,
-            labelNameStart: 'From',
-            labelNameEnd: 'To',
-            filters: [],
-            chips: [],
-            items: []
+            currentPage: 1,
+            startDate: new Date().toISOString().substr(0, 10),
+            endDate: new Date().toISOString().substr(0, 10),
+            startMenu: false,
+            endMenu: false,
+            postType: 'ALL',
+            postTags: [],
+            category: 'ALL',
+            location: 'ALL',
+            filters: 'LATEST',
         }
     },
     methods: {
-        remove (item) {
-            this.chips.splice(this.chips.indexOf(item), 1)
-            this.chips = [...this.chips]
-        },
+        ...mapActions('searchStore',['makeSearch']),
+        ...mapActions('postStore',[
+            'allCategories',
+            'allLocations',
+            'allTags',
+            'fetchAllTypes'
+        ])
     }
 
 }

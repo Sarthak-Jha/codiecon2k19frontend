@@ -7,10 +7,10 @@
 
             <v-spacer></v-spacer>
 
-            <form v-if="show" id="app" action="#">
+            <form id="app" action="#">
                 <label :data-state="state" for="search">
-                    <input type="text" placeholder="Search" @click="state = 'opan'" @blur="state='close'"/>
-                    <i class="fa fa-search" @click="" aria-hidden="true"></i>
+                    <input type="text" v-model="searchTerm" placeholder="Search" @click="state = 'opan'" @blur="state='close'"/>
+                    <i class="fa fa-search" @enter="searchNews()" aria-hidden="true"></i>
                 </label>
             </form>
 
@@ -76,7 +76,9 @@ export default {
     name: "Navbar",
     data () {
         return {
-            state: "close"
+            state: "close",
+            currentPage: 1,
+            searchTerm: ''
         }
     },
     computed: {
@@ -85,22 +87,24 @@ export default {
                 'isLoggedIn'
         ]),
         login () {
-            if(this.isLoggedIn.status || this.$session.get('isLoggedIn') || sessionStorage.getItem('isLoggedIn')) {
+            if(this.isLoggedIn.status || this.$session.get('isLoggedIn')) {
                 return true
             } 
             return false
         },
         show: function () {
+            console.log('This is my lola',window.location.pathname)
             if ( window.location.pathname == '/') {
-                return false
+                return true
             }
-            return true
+            return false
         }
     },
     methods: {
         ...mapActions('userStore',[
             'doLogout'
         ]),
+        ...mapActions('searchStore',['makeSearch']),
         logout () {
             let data = {
                 token: this.$session.get('token') 
@@ -116,6 +120,19 @@ export default {
             })
             this.$router.push('/')
         },
+        searchNews () {
+            let data = {
+                'category': "ALL",
+                'text': this.searchTerm
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+            this.$router.push({ path: 'newsfeeds', query: { category : 'search' }})
+        }
     }
 }
 </script>

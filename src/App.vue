@@ -3,9 +3,7 @@
     <div class="head">
       <navbar></navbar>
     </div>
-    <keep-alive>
       <router-view></router-view>
-    </keep-alive>
     <div class="footer">
       <v-content>
       <foot></foot>

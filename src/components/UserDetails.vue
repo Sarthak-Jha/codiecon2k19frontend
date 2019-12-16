@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
     export default {
         name: "UserDetails",
@@ -41,12 +41,15 @@ import { mapGetters } from 'vuex'
         },
         computed:{
             ...mapGetters('userStore',['userSelfDetails']),
+            ...mapGetters('postStore',['getTheUserById']),
             fullname () {
                 console.log("hss", this.userSelfDetails)
                 return this.userSelfDetails.firstName + ' ' + this.userSelfDetails.lastName
-            }
-
+            },
         },
+        methods: {
+            ...mapActions('postStore',['getUserById']),
+        }
     }
 </script>
 

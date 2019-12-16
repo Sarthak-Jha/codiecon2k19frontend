@@ -45,6 +45,7 @@ export default {
             getAllGroups: ':8091/post/api/v1/post/getAllGroups',
             getAllLocations: ':8091/post/api/v1/post/getAllLocations',
             getAllTags: ':8091/post/api/v1/post/getAllTags',
+            getAllTypes: ':8091/post/api/v1/user/getAllType',
             getFormFeilds: function (category) {
                 return ':8091/post/api/v1/post/getFormFeilds/' + category
             },

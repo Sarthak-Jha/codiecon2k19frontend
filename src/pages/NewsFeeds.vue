@@ -110,9 +110,9 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly; 
+    justify-content: flex-start; 
     &__single {
-        margin: 5px 30px;
+        margin: 10px 20px;
         min-width: 28vw;
     }
 }

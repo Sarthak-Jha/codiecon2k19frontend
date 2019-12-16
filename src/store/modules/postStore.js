@@ -7,7 +7,9 @@ export const state = {
     allLocations: [],
     allTags: [],
     allPostType: [],
-    imageUploadLink: ''
+    imageUploadLink: '',
+    userDetails: {},
+    allTypes: []
 }
 
 export const mutations = {
@@ -31,6 +33,12 @@ export const mutations = {
     },
     setImageLink (state, value) {
         state.imageUploadLink = value
+    },
+    setUserDetails (state, value) {
+        state.userDetails = value
+    },
+    setAllTypes (state, value) {
+        state.allTypes = value
     }
 }
 
@@ -73,6 +81,14 @@ export const actions = {
     setAllPostType ({commit}, data) {
         commit('allPostType', data)
     },
+    fetchAllTypes ({commit}, {data, success,fail}) {
+        MainApi.getAllTypes( (res) => {
+            commit('setAllTypes', res.body.responseObject)
+            success && success(res)
+        }, (res) => {
+            fail && fail()
+        })  
+    },
     getUploadLinkImage({commit}, {data, success, fail}) {
         let headers = {
             'Content-Type': 'multipart/form-data',
@@ -104,6 +120,17 @@ export const actions = {
         }, data, (res) => {
             fail && fail(res)
         }, headers)
+    },
+    getUserById ({commit}, {head, success, fail, apiParams}) {
+        let headers = {
+            Authorization: 'Bearer ' + head.token
+        }
+        MainApi.getUserDetails( (res) => {
+            alert("user details")
+            success && success(res)
+        }, (res) => {
+            fail && fail(res)
+        },headers, apiParams)
     }
 }
 
@@ -128,6 +155,12 @@ export const getters = {
     },
     getImageUploadLink (state) {
         return state.imageUploadLink
+    },
+    getTheUserById (state) {
+        return state.userDetails
+    },
+    getAllType (state) {
+        return state.allTypes
     }
 }
 

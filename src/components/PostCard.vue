@@ -17,10 +17,16 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-img
+            <v-img v-if="image"
             :src="postData.photoLinks[0]"
             height="194"
             ></v-img>
+            
+            <v-img v-else
+            src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
+            height="194"
+            ></v-img>
+
             <v-card-title>
                 {{postData.type}}
             </v-card-title>
@@ -62,6 +68,12 @@ export default {
     computed: {
         getName () {
             return this.postData.posterFirstName + '' + this.postData.posterLastName
+        },
+        image () {
+            if (this.postData.photoLinks) {
+                return true
+            }
+            return false
         }
     },
     methods: {

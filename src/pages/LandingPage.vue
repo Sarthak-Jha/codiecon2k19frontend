@@ -6,7 +6,7 @@
                 <v-btn class="welcome__button" @click="searchNews()">Search</v-btn>
             </section>
             <section class="paragraph">
-                Here Are our Categories
+                :))
                 <section class="cards">
                     <div v-if="getAllCategories.length" class="text-center" v-for="category in categories" :key="category.categoryId">
                         <activitycard :category="category" @clicked="selectedCategory">
@@ -90,7 +90,8 @@ export default {
         ...mapActions('postStore',[
             'allCategories',
             'allLocations',
-            'allTags'
+            'allTags',
+            'fetchAllTypes'
         ]),
         ...mapActions('searchStore',['makeSearch']),
         selectedCategory( value ) {
@@ -111,13 +112,24 @@ export default {
 
         },
         searchNews () {
-
+            let data = {
+                'category': "ALL",
+                'text': this.searchTerm
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+            this.$router.push({ path: 'newsfeeds', query: { category : 'search' }})
         }
     },
     mounted () {
         this.allCategories({}),
         this.allLocations({}),
-        this.allTags({})
+        this.allTags({}),
+        this.fetchAllTypes({}),
         this.categories = this.getAllCategories
     },
 }
@@ -163,6 +175,7 @@ export default {
         color: #777;
         opacity: 0.9;
         background-color: #ffffff;
+        border-radius: 7px;
         filter: alpha(opacity=60);
         text-align:center;
         min-height: 50px;
