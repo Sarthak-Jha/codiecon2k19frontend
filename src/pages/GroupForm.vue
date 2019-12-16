@@ -39,7 +39,7 @@
                                 chips
                                 item-text="userName"
                                 item-value="userId"
-                                label="Tags"
+                                label="Add Members"
                                 multiple
                         ></v-select>
                     </v-list-item>
@@ -81,7 +81,7 @@ export default {
         ...mapGetters('searchStore', ['getUserList'])
     },
     methods: {
-        ...mapActions('postStore', ['getUploadLinkImage', 'submitGroupForm']),
+        ...mapActions('postStore', ['getUploadLinkImage', 'submitGroupForm','allGroupsByUser']),
         saveImage() {
             let reader = new FileReader()
             reader.onload = () => {
@@ -104,7 +104,6 @@ export default {
             this.groupImageURl = res.body.uploadLink
         },
         submitForm () {
-            console.log(this.groupImageURl)
             let data = {
                 creatorId: this.userSelfDetails.userId,
                 groupName: this.groupName,
@@ -115,6 +114,11 @@ export default {
                 token: this.$session.get('token')
             }
             this.submitGroupForm({data, head})
+            data = {
+                Authorization: 'Bearer ' + this.$session.get('token')
+            }
+            this.allGroupsByUser({data})
+            this.$router.push('/groups')
         }
     }
 }

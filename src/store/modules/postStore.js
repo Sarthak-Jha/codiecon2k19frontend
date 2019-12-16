@@ -9,7 +9,9 @@ export const state = {
     allPostType: [],
     imageUploadLink: '',
     userDetails: {},
-    allTypes: []
+    allTypes: [],
+    postDetailsPage: {},
+    commentList: []
 }
 
 export const mutations = {
@@ -39,6 +41,12 @@ export const mutations = {
     },
     setAllTypes (state, value) {
         state.allTypes = value
+    },
+    setPostDetailsPage (state, value) {
+        state.postDetailsPage = value
+    },
+    setCommentList (state, value) {
+        state.commentList = value
     }
 }
 
@@ -55,6 +63,7 @@ export const actions = {
         })
     },
     allGroupsByUser ({commit}, {data, success,fail}) {
+        debugger
         MainApi.getGroupsByUser( (res) => {
             commit('setAllGroupsByUser', res.body.responseObject)
             success && success(res)
@@ -87,7 +96,7 @@ export const actions = {
             success && success(res)
         }, (res) => {
             fail && fail()
-        })  
+        })
     },
     getUploadLinkImage({commit}, {data, success, fail}) {
         let headers = {
@@ -105,7 +114,7 @@ export const actions = {
             Authorization: 'Bearer ' + head.token
         }
         MainApi.addPost( (res) => {
-            alert("form Posted Succesfully")
+            this.$alert("Form Posted Succesfully")
             success && success(res)
         }, data, (res) => {
             fail && fail(res)
@@ -116,6 +125,7 @@ export const actions = {
             Authorization: 'Bearer ' + head.token
         }
         MainApi.addGroup( (res) => {
+            this.$alert('Group Created')
             success && success(res)
         }, data, (res) => {
             fail && fail(res)
@@ -126,11 +136,49 @@ export const actions = {
             Authorization: 'Bearer ' + head.token
         }
         MainApi.getUserDetails( (res) => {
-            alert("user details")
             success && success(res)
         }, (res) => {
             fail && fail(res)
         },headers, apiParams)
+    },
+    addLikeToPost ({commit}, {data, head, success, fail}) {
+        let headers = {
+            Authorization: 'Bearer ' + head.token
+        }
+        MainApi.addLike( (res) => {
+            success && success(res)
+        }, data, (res) => {
+            fail && fail()
+        }, headers)
+    },
+    fetchPostDetails ({commit}, {data, head, success, fail}) {
+        let headers = {
+            Authorization: 'Bearer ' + head.token
+        }
+        MainApi.getPost( (res) => {
+            commit('setPostDetailsPage', res.body.responseObject)
+            success && success(res)
+        }, data, (res) => {
+            fail && fail(res)
+        }, headers)
+    },
+    fetchCommentList ({commit}, {data, success, fail}) {
+        MainApi.getCommentsByPostId( (res) => {
+            commit('setCommentList', res.body.responseObject)
+            success && success(res)
+        }, data, (res) => {
+            fail && fail(res)
+        })
+    },
+    uploadUserComment ({commit}, {data, head, success, fail}) {
+        let headers = {
+            Authorization: head.Authorization
+        }
+        MainApi.addComment( (res) => {
+            success && success(res)
+        },data , (res) => {
+            fail && fail(res)
+        }, headers)
     }
 }
 
@@ -161,6 +209,12 @@ export const getters = {
     },
     getAllType (state) {
         return state.allTypes
+    },
+    getPostDetails (state) {
+        return state.postDetailsPage
+    },
+    getCommentList (state) {
+        return state.commentList
     }
 }
 

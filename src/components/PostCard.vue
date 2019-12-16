@@ -21,7 +21,7 @@
             :src="postData.photoLinks[0]"
             height="194"
             ></v-img>
-            
+
             <v-img v-else
             src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
             height="194"
@@ -39,13 +39,11 @@
                 {{postData.commentsCounts}} Comments
             </v-card-title>
         <v-card-actions>
-        <v-btn text color="deep-purple accent-4">
-            <router-link class="link" to="/postdetails">Read</router-link>
-        </v-btn>
+            <v-btn class="readPost" @click="readFullPost()">Read</v-btn>
         <v-spacer></v-spacer>
 
         <v-card-title>
-            {{postData.likeCounts}} 
+            {{postData.likeCounts}}
         </v-card-title>
 
         <v-btn icon @click="handleLike">
@@ -56,6 +54,8 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
+
 export default {
     name: 'postCard',
     props: {
@@ -77,8 +77,37 @@ export default {
         }
     },
     methods: {
+        ...mapActions('postStore', ['addLikeToPost','fetchPostDetails','fetchCommentList']),
         handleLike () {
             this.postData.alreadyLiked = !this.postData.alreadyLiked
+            let data = {
+                postId: this.postData.postId,
+                forLike: this.postData.alreadyLiked
+            }
+            let head = {
+                token: this.$session.get('token')
+            }
+            this.addLikeToPost({data, head})
+            if(this.postData.alreadyLiked) {
+                this.postData.likeCounts = this.postData.likeCounts + 1
+            } else {
+                this.postData.likeCounts = this.postData.likeCounts - 1
+            }
+
+        },
+        readFullPost () {
+            let data = {
+                postId: this.postData.postId
+            }
+            let head = {
+                token: this.$session.get('token')
+            }
+            this.fetchPostDetails({data, head})
+            data = {
+                postId: this.postData.postId
+            }
+            this.fetchCommentList({data})
+            this.$router.push('/postdetails')
         }
     }
 }
@@ -90,5 +119,9 @@ export default {
     }
     .active {
         background-color: red;
+    }
+    .readPost {
+        color: #1976d2;
+        margin-left: 10px;
     }
 </style>
