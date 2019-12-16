@@ -7,7 +7,7 @@
 
             <v-spacer></v-spacer>
 
-            <form id="app" action="#">
+            <form id="app">
                 <label :data-state="state" for="search">
                     <input type="text" v-model="searchTerm" placeholder="Search" @click="state = 'opan'" @blur="state='close'"/>
                     <i class="fa fa-search" @enter="searchNews()" aria-hidden="true"></i>
@@ -16,7 +16,8 @@
 
             <v-toolbar-items class="nav__content">
                 <v-btn text class="nav__content__text"><router-link class="link" to="/newsfeeds">Newsfeeds</router-link></v-btn>
-                <v-menu
+                <v-btn text class="nav__content__text"><router-link class="link" to="/createpost">Create Post</router-link></v-btn>
+                <!-- <v-menu
                         bottom
                         origin="center center"
                         transition="scale-transition"
@@ -36,7 +37,7 @@
                         <v-list-item><router-link class="link" to="/createpost">Create Post</router-link></v-list-item>
                         <v-list-item><router-link class="link" to="/feedback">Feedback Form</router-link></v-list-item>
                     </v-list>
-                </v-menu>
+                </v-menu> -->
                 <v-btn text class="nav__content__text"><router-link class="link" to="/groups">Groups</router-link></v-btn>
                 <v-menu
                         bottom
@@ -94,10 +95,10 @@ export default {
         },
         show: function () {
             console.log('This is my lola',window.location.pathname)
-            if ( window.location.pathname == '/') {
-                return true
+            if ( window.location.pathname === '/') {
+                return false
             }
-            return false
+            return true
         }
     },
     methods: {

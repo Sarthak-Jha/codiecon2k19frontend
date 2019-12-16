@@ -11,8 +11,8 @@
                     <v-list-item-title class="headline">
                         <router-link class="link" to="/postdetails">{{postData.title}}</router-link>
                     </v-list-item-title>
-                    <v-list-item-subtitle>
-                        <router-link class="link" to="/userdetail">by {{getName}}</router-link>
+                    <v-list-item-subtitle @click="routeToProfile">
+                        <a href="javascript:void(0)" class="link">by {{getName}}</a>
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -32,8 +32,15 @@
             </v-card-title>
             <v-card-title>
                 <v-btn disabled v-for="tag in postData.tags" :key="tag">
-                    {{tag}}
+                    {{ tag }} 
                 </v-btn>
+            </v-card-title>
+            <v-card-title v-if="showPrice">
+                Rs. {{postData.price}}
+            </v-card-title>
+            <v-card-title v-else>
+                <v-card-title>
+                </v-card-title>
             </v-card-title>
             <v-card-title>
                 {{postData.commentsCounts}} Comments
@@ -74,6 +81,12 @@ export default {
                 return true
             }
             return false
+        },
+        showPrice () {
+            if( this.postData.price == 0) {
+                return false
+            }
+            return true
         }
     },
     methods: {
@@ -108,6 +121,9 @@ export default {
             }
             this.fetchCommentList({data})
             this.$router.push('/postdetails')
+        },
+        routeToProfile () {
+            this.$router.push({ path: 'Userdetail', query: { userId : this.postData.postedBy }})
         }
     }
 }

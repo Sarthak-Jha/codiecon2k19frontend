@@ -11,9 +11,12 @@
                 </v-avatar>
             </v-col>
         </v-row>
-        <div class="userData">{{fullname}}</div>
-        <div class="userData">{{userSelfDetails.mailId}}</div>
-        <div class="userData">{{userSelfDetails.phoneNumber}}</div>
+        <div class="userData" v-if="self">{{fullname}}</div>
+        <div class="userData" v-else>{{fullnameO}}</div>
+        <div class="userData" v-if="self">{{userSelfDetails.mailId}}</div>
+        <div class="userData" v-else>{{getTheUserById.mailId}}</div>
+        <div class="userData" v-if="self">{{userSelfDetails.phoneNumber}}</div>
+        <div class="userData" v-else>{{getTheUserById.phoneNumber}}</div>
         <div class="userData">Intrests:</div>
         <div class="userDataList">
             <div v-for="val in item.interest">
@@ -25,11 +28,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { parse } from 'path'
 
     export default {
         name: "UserDetails",
         data () {
             return {
+                self: true,
                 item: {
                     interest: [
                         'badminton',
@@ -39,6 +44,22 @@ import { mapGetters, mapActions } from 'vuex'
                 }
             }
         },
+        mounted () {
+            console.log('mounted is called here')
+            if (this.$route.query.userId) {
+                let apiParam = this.$route.query.userId
+                let head = {
+                    token: this.$session.get('token')
+                }
+                console.log('kkkkkklaslas', apiParam)
+                this.getUserById({
+                    head: head, 
+                    success: this.success, 
+                    fail: this.fail, 
+                    apiParams: apiParam
+                })
+            } 
+        },
         computed:{
             ...mapGetters('userStore',['userSelfDetails']),
             ...mapGetters('postStore',['getTheUserById']),
@@ -46,9 +67,18 @@ import { mapGetters, mapActions } from 'vuex'
                 console.log("hss", this.userSelfDetails)
                 return this.userSelfDetails.firstName + ' ' + this.userSelfDetails.lastName
             },
+            fullnameO () {
+                return this.getTheUserById.firstName + ' ' + this.getTheUserById.lastName
+            }
         },
         methods: {
             ...mapActions('postStore',['getUserById']),
+            success () {
+                this.self = false
+            },
+            fail () {
+                this.self  = true
+            }
         }
     }
 </script>

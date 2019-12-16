@@ -14,9 +14,17 @@
                         ></v-pagination>
                     </div>
                 </section>
-                <section class="cards">
-                    <div class="cards__single" v-for="post in getSearchResult.contentList" :key="post.postId">
-                        <post-card :postData="post"></post-card>
+                <section >
+                    <div v-if="resultFound" class="cards">
+                        <div class="cards__single" v-for="post in getSearchResult.contentList" :key="post.postId">
+                            <post-card :postData="post"></post-card>
+                        </div>
+                    </div>
+                    <div v-else  class="cards">
+                        <v-card class="cards__notfound" style="min-width: 63vw; min-height: 115vh;">
+                            <v-img src="https://cdn.dribbble.com/users/1053528/screenshots/4341024/not-found.jpg">
+                            </v-img>
+                        </v-card>
                     </div>
                 </section>
                 <section class="pagination">
@@ -67,8 +75,13 @@ export default {
                 return this.getSearchResult.totalElements/6 + 1
             }
             return 1
+        },
+        resultFound () {
+            if (this.getSearchResult.totalElements === 0) {
+                return false
+            }
+            return true
         }
-
     },
     methods: {
         ...mapActions('searchStore',['makeSearch'])
@@ -110,10 +123,17 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start; 
+    justify-content: flex-start;
+    min-height: 120vh;
     &__single {
         margin: 10px 20px;
         min-width: 28vw;
+    }
+    &____notfound {
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+        text-align: center;
     }
 }
 .pagination {

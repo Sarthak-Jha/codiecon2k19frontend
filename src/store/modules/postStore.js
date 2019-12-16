@@ -131,11 +131,13 @@ export const actions = {
             fail && fail(res)
         }, headers)
     },
-    getUserById ({commit}, {head, success, fail, apiParams}) {
+    getUserById ({commit}, { success, fail, head, apiParams}) {
         let headers = {
             Authorization: 'Bearer ' + head.token
         }
+        console.log('weare here', apiParams)
         MainApi.getUserDetails( (res) => {
+            commit('setUserDetails', res.body.responseObject)
             success && success(res)
         }, (res) => {
             fail && fail(res)

@@ -55,6 +55,7 @@
                             attach
                             chips
                             item-text="categoryName"
+                            item-value="categoryId"
                             label="Categories"
                         ></v-select>
 
@@ -117,6 +118,7 @@
                             attach
                             chips
                             item-text="name"
+                            item-value="id"
                             label="Locations"
                         ></v-select>
 
@@ -142,7 +144,6 @@
                             <v-text-field
                                 v-model="startDate"
                                 label='From'
-                                readonly
                                 v-on="on"
                             ></v-text-field>
                             </template>
@@ -163,7 +164,6 @@
                             <v-text-field
                                 v-model="endDate"
                                 label='To'
-                                readonly
                                 v-on="on"
                             ></v-text-field>
                             </template>
@@ -200,7 +200,32 @@ export default {
         },
         computedStartTime () {
             return null
-        }
+        },
+        // category () {
+        //     if(this.categories === 'Accomodation') {
+        //         return 1
+        //     } else if (this.categories === 'Electronics') {
+        //         return 2
+        //     } else if (this.categories === 'Household') {
+        //         return 3
+        //     } else if (this.categories === 'Vehicles') {
+        //         return 4
+        //     } else if (this.categories === 'Activities') {
+        //         return 5
+        //     } else if (this.categories === 'Discussion') {
+        //         return 6
+        //     } else if (this.categories === 'Miscellaneous'){
+        //         return 7
+        //     }
+            
+        // },
+        // location () {
+        //     if(this.categories === 'Banglore') {
+        //         return 1
+        //     } else if (this.categories === 'Mumbai') {
+        //         return 2
+        //     }
+        // }
 
     },
     created () {
@@ -223,6 +248,9 @@ export default {
         })
     },
     watch: {
+        startDate () {
+            this.endDate = this.startDate.toISOString().substr(0, 10)
+        },
         filters () {
             let data = {
                 'sortType': this.filters,
@@ -307,42 +335,7 @@ export default {
                 fail: this.fail,
                 apiParam: this.currentPage
             })
-        },
-        startTime () {
-            let data = {
-                'sortType': this.filters,
-                'category': this.category,
-                'location': this.location,
-                'postType': this.postType,
-                'tag': this.postTags,
-                'startTime': this.computedStartTime,
-                'endTime': this.computedEndTime
-            }
-            this.makeSearch({
-                data,
-                success: this.success,
-                fail: this.fail,
-                apiParam: this.currentPage
-            })
-        },
-        endTime () {
-            let data = {
-                'sortType': this.filters,
-                'category': this.category,
-                'location': this.location,
-                'postType': this.postType,
-                'tag': this.postTags,
-                'startTime': this.computedStartTime,
-                'endTime': this.computedEndTime
-            }
-            this.makeSearch({
-                data,
-                success: this.success,
-                fail: this.fail,
-                apiParam: this.currentPage
-            })
         }
-
     },
     data () {
         return {
