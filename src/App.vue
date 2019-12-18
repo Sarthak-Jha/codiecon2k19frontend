@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 import Navbar from './components/Navbar';
 import Foot from './components/Footer';
 

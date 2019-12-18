@@ -13,16 +13,7 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'feedbackForm',
-    data () {
-        return {
-
-        }
-    }
-}
-</script>
+<script src='./js/feedbackform.js'></script>
 
 <style lang="scss" scoped>
 .main {

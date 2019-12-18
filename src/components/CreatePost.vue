@@ -10,20 +10,7 @@
     </section>
 </template>
 
-<script>
-    import categoryPage from './CategoryPage'
-    import {mapGetters} from 'vuex'
-
-    export default {
-        name: "CreatePost",
-        components: {
-            categoryPage
-        },
-        computed: {
-            ...mapGetters('postStore', ['getAllCategories'])
-        }
-    }
-</script>
+<script src='./js/createpost.js'></script>
 
 <style scoped>
     .cards {

@@ -1,7 +1,7 @@
 export default {
     api: {
         base_path: {
-            auth: '10.177.68.18',
+            auth: '10.177.68.224',
             post: '10.177.68.18:8091/api/v1',
             solr: '10.177.68.18:8060/api/v1',
             base: '/api/v1',
