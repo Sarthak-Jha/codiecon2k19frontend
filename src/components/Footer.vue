@@ -45,14 +45,7 @@
   </v-footer>
 </template>
 
-<script>
-export default {
-  name: 'Footer',
-  data: () => ({
-
-  }),
-}
-</script>
+<script src='./js/footer.js'></script>
 
 <style lang="scss" scoped>
 .icons {

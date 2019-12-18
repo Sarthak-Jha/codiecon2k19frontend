@@ -16,22 +16,8 @@
   </v-card>
 </template>
 
-<script>
-export default {
-    name: 'activityCard',
-    props: {
-        category: {
-            type: Object,
-            required: true,
-            default: () => []
-        }
-    },
-    methods: {
-        selectedCategory (id) {
-            this.$emit('clicked', id)
-        }
-    }
-}
+<script src='./js/activitycard.js'>
+
 </script>
 
 

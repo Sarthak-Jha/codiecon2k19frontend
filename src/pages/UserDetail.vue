@@ -4,16 +4,7 @@
     </div>
 </template>
 
-<script>
-import UserDetails from '../components/UserDetails'
-
-export default {
-    name: 'UserDetail',
-    components: {
-        UserDetails
-    }
-}
-</script>
+<script src='./js/userdetails.js'></script>
 
 <style lang="scss" scoped>
 .main {

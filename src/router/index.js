@@ -1,9 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Landing from '../pages/LandingPage.vue'
-import CreatePost from "../components/CreatePost"
-import PostForm from "../pages/Postform";
-
+const Landing = () => import(/* webpackChunkName: "landing" */ '../pages/LandingPage.vue')
+const CreatePost = () => import(/* webpackChunkName: "createpost" */ '../components/CreatePost')
+const PostForm = () => import(/* webpackChunkName: "postform" */'../pages/Postform')
+const Profile = () => import(/* webpackChunkName: "profile" */ '../pages/Profile.vue')
+const NwesFeeds = () => import(/* webpackChunkName: "newsfeeds" */ '../pages/NewsFeeds')
+const Login = () => import(/* webpackChunkName: "login" */ '../pages/LoginPage')
+const Register = () => import(/* webpackChunkName: "register" */ '../pages/SignUp')
+const Groups = () => import(/* webpackChunkName: "groups" */ '../pages/Groups')
+const FeedbackForm = () => import(/* webpackChunkName: "feedbackform" */ '../pages/FeedbackForm')
+const GroupForm = () => import(/* webpackChunkName: "groupform" */ '../pages/GroupForm')
+const PostDetails =  () => import(/* webpackChunkName: "postdetails" */ '../pages/PostDetails')
+const UserDetail = () => import(/* webpackChunkName: "userdetail" */ '../pages/UserDetail')
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,7 +23,7 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '../pages/Profile.vue'),
+    component: Profile,
     meta      : {
 			authentication: 'required'
 		}
@@ -23,7 +31,7 @@ const routes = [
   {
     path: '/newsfeeds',
     name: 'newsfeeds',
-    component: () => import(/* webpackChunkName: "newsfeeds" */ '../pages/NewsFeeds'),
+    component: NwesFeeds,
     meta      : {
 			authentication: 'required'
 		}
@@ -31,17 +39,17 @@ const routes = [
   {
     path: '/login',
     name: 'loginpage',
-    component: () => import(/* webpackChunkName: "login" */ '../pages/LoginPage')
+    component: Login
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import(/* webpackChunkName: "register" */ '../pages/SignUp')
+    component: Register
   },
   {
     path: '/groups',
     name: 'groups',
-    component: () => import(/* webpackChunkName: "groups" */ '../pages/Groups'),
+    component: Groups,
     meta      : {
 			authentication: 'required'
 		}
@@ -49,7 +57,7 @@ const routes = [
   {
     path: '/feedback',
     name: 'feedbackForm',
-    component: () => import(/* webpackChunkName: "feedbackform" */ '../pages/FeedbackForm'),
+    component: FeedbackForm,
     meta      : {
 			authentication: 'required'
 		}
@@ -57,7 +65,7 @@ const routes = [
   {
     path: '/groupform',
     name: 'groupForm',
-    component: () => import(/* webpackChunkName: "groupform" */ '../pages/GroupForm'),
+    component: GroupForm,
     meta      : {
 			authentication: 'required'
 		}
@@ -65,7 +73,7 @@ const routes = [
   {
     path: '/postdetails',
     name: 'postDetails',
-    component: () => import(/* webpackChunkName: "postdetails" */ '../pages/PostDetails'),
+    component: PostDetails,
     meta      : {
 			authentication: 'required'
 		}
@@ -73,7 +81,7 @@ const routes = [
   {
     path: '/userdetail',
     name: 'UserDetail',
-    component: () => import(/* webpackChunkName: "userdetail" */ '../pages/UserDetail'),
+    component: UserDetail,
     meta      : {
 			authentication: 'required'
 		}
@@ -120,6 +128,7 @@ router.beforeEach((to, from, next) => {
   } else if (authenticationCheck(to) && !isLoggedIn){
     // console.log(' @@ MY SESSION (ELSE IF)= ', isLoggedIn)
     next('/login');
+    // next();
   } else {
     // console.log(' @@ MY SESSION (ELSE)= ', isLoggedIn)
     next()
