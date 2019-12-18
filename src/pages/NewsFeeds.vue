@@ -8,21 +8,29 @@
                 <section class="pagination">
                     <div class="text-center">
                         <v-pagination
-                        v-model="page"
+                        v-model="currentPage"
                         :length="totalPage"
                         circle
                         ></v-pagination>
                     </div>
                 </section>
-                <section class="cards">
-                    <div class="cards__single" v-for="post in 10" :key="post">
-                        <post-card :postData="post"></post-card>
+                <section >
+                    <div v-if="resultFound" class="cards">
+                        <div class="cards__single" v-for="post in getSearchResult.contentList" :key="post.postId">
+                            <post-card :postData="post"></post-card>
+                        </div>
+                    </div>
+                    <div v-else  class="cards">
+                        <v-card class="cards__notfound" style="min-width: 63vw; min-height: 115vh;">
+                            <v-img src="https://cdn.dribbble.com/users/1053528/screenshots/4341024/not-found.jpg">
+                            </v-img>
+                        </v-card>
                     </div>
                 </section>
                 <section class="pagination">
                     <div class="text-center">
                         <v-pagination
-                        v-model="page"
+                        v-model="currentPage"
                         :length="totalPage"
                         circle
                         ></v-pagination>
@@ -36,6 +44,7 @@
 <script>
 import postCard from '../components/PostCard'
 import searchFilters from '../components/SearchFilters'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name: 'newsfeeds',
@@ -43,32 +52,44 @@ export default {
         postCard,
         searchFilters
     },
+    mounted () {
+        if (!this.$route.query.category) {
+            let data = {
+                'category' : 'all'
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        }
+    },
+    computed: {
+        ...mapGetters('searchStore',['getSearchResult']),
+        totalPage () {
+            if (this.getSearchResult) {
+                if (this.getSearchResult.totalElements%6 == 0) {
+                    return this.getSearchResult.totalElements/6
+                }
+                return this.getSearchResult.totalElements/6 + 1
+            }
+            return 1
+        },
+        resultFound () {
+            if (this.getSearchResult.totalElements === 0) {
+                return false
+            }
+            return true
+        }
+    },
+    methods: {
+        ...mapActions('searchStore',['makeSearch'])
+
+    },
     data () {
         return {
-            page: 1,
-            totalPage: 10,
-            posts : {
-                "postId": "0c52b8ed-c133-4361-93eb-4ff9146771f0",
-                "location": "string",
-                "title": "string",
-                "description": "string",
-                "postedBy": "2",
-                "category": "string",
-                "type": "SEEKER",
-                "createdTime": 1576255168280,
-                "lastUpdatedTime": 1576255168280,
-                "photoLinks": [
-                "string"
-                ],
-                "likeCounts": 0,
-                "commentsCounts": 0,
-                "posterFirstName": "string",
-                "posterLastName": "string",
-                "posterProfilePictureLink": null,
-                "status": "PENDING_APPROVAL",
-                "alreadyLiked": false,
-                "promoted": true
-            }
+            currentPage: 1
         }
     }
 
@@ -87,6 +108,7 @@ export default {
     align-self: center;
     &-left {
         flex-grow: 1;
+        max-width: 30vw;
     }
     &-right {
         flex-grow: 2;
@@ -101,9 +123,17 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly; 
+    justify-content: flex-start;
+    min-height: 120vh;
     &__single {
-        margin: 10px 30px;
+        margin: 10px 20px;
+        min-width: 28vw;
+    }
+    &____notfound {
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+        text-align: center;
     }
 }
 .pagination {

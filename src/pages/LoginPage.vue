@@ -14,7 +14,7 @@
                                 <v-form>
 
                                     <v-text-field
-                                        label="Username"
+                                        label="E-mail"
                                         name="login"
                                         type="text"
                                         v-model="loginData.mailId"
@@ -46,7 +46,7 @@
                                             </v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
-                                    
+
                                 </v-form>
                             </v-card-text>
                             <v-card-actions>
@@ -81,12 +81,15 @@ export default {
     },
     methods: {
         ...mapActions('userStore',[
-            'validateLogin'
+            'validateLogin',
+            'fetchUserDetails'
+        ]),
+        ...mapActions(
+        'postStore', [
+            'allGroupsByUser'
         ]),
         handleSubmit () {
-            debugger
             let data = this.loginData
-            console.log("handle Submit", data)
             if (this.validateCredentials) {
                 this.validateLogin({
                     data,
@@ -106,14 +109,23 @@ export default {
         validateLoginSuccess (resp) {
             if (resp.body.responseObject) {
                 this.$session.set('isLoggedIn', true);
-				localStorage.setItem('isLoggedIn', true);
+				sessionStorage.setItem('isLoggedIn', true);
 				this.$session.set('token', resp.body.responseObject.oauth2AccessToken.access_token);
-                localStorage.setItem('token', resp.body.responseObject.oauth2AccessToken.access_token);
+                sessionStorage.setItem('token', resp.body.responseObject.oauth2AccessToken.access_token);
                 this.$session.set('refreshToken', resp.body.responseObject.oauth2AccessToken.refresh_token);
-                localStorage.setItem('refreshToken', resp.body.responseObject.oauth2AccessToken.refresh_token);
+                sessionStorage.setItem('refreshToken', resp.body.responseObject.oauth2AccessToken.refresh_token);
                 this.$store.commit('userStore/setUserDetails', {
 					status : true,
 					...resp.body.responseObject
+                })
+                let data = {
+                    Authorization: 'Bearer ' + this.$session.get('token')
+                }
+                this.fetchUserDetails({
+                    data
+                })
+                this.allGroupsByUser({
+                    data
                 })
                 this.$router.push('/')
             } else {

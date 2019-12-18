@@ -69,9 +69,9 @@
                                         <v-list-item>
                                             <v-list-item-content>
                                                 <v-list-item-title>
-                                                    Already Registered ? 
+                                                    Already Registered ?
                                                     <router-link class="link" to="/login">
-                                                        Login 
+                                                        Login
                                                     </router-link>
                                                 </v-list-item-title>
                                             </v-list-item-content>
@@ -182,7 +182,7 @@ export default {
 
 <style lang="scss" scoped>
 #app{
-    padding-top: 40px;
+    margin-top: 70px;
 }
 .link {
     text-decoration: none;

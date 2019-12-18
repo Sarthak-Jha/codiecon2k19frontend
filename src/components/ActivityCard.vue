@@ -3,16 +3,16 @@
     class="mx-auto"
     min-width="200"
 
-    @click="selectedCategory"
+    @click="selectedCategory(category.categoryId)"
   >
     <v-img
-      class="white--text align-end"
+      class="black--text align-end"
       height="150px"
       width= "300px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      :src="category.categoryImage"
     >
-      <v-card-title>{{category}}</v-card-title>
     </v-img>
+    <v-card-title>{{category.categoryName}}</v-card-title>
   </v-card>
 </template>
 
@@ -21,14 +21,14 @@ export default {
     name: 'activityCard',
     props: {
         category: {
-            type: String,
+            type: Object,
             required: true,
             default: () => []
         }
     },
     methods: {
         selectedCategory (id) {
-            this.$emit('category', id)
+            this.$emit('clicked', id)
         }
     }
 }

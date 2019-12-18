@@ -7,16 +7,17 @@
 
             <v-spacer></v-spacer>
 
-            <form v-if="show" id="app" action="#">
+            <form id="app">
                 <label :data-state="state" for="search">
-                    <input type="text" placeholder="Search" @click="state = 'opan'" @blur="state='close'"/>
-                    <i class="fa fa-search" @click="" aria-hidden="true"></i>
+                    <input type="text" v-model="searchTerm" placeholder="Search" @click="state = 'opan'" @blur="state='close'"/>
+                    <i class="fa fa-search" @enter="searchNews()" aria-hidden="true"></i>
                 </label>
             </form>
 
             <v-toolbar-items class="nav__content">
                 <v-btn text class="nav__content__text"><router-link class="link" to="/newsfeeds">Newsfeeds</router-link></v-btn>
-                <v-menu
+                <v-btn text class="nav__content__text"><router-link class="link" to="/createpost">Create Post</router-link></v-btn>
+                <!-- <v-menu
                         bottom
                         origin="center center"
                         transition="scale-transition"
@@ -36,7 +37,7 @@
                         <v-list-item><router-link class="link" to="/createpost">Create Post</router-link></v-list-item>
                         <v-list-item><router-link class="link" to="/feedback">Feedback Form</router-link></v-list-item>
                     </v-list>
-                </v-menu>
+                </v-menu> -->
                 <v-btn text class="nav__content__text"><router-link class="link" to="/groups">Groups</router-link></v-btn>
                 <v-menu
                         bottom
@@ -76,7 +77,9 @@ export default {
     name: "Navbar",
     data () {
         return {
-            state: "close"
+            state: "close",
+            currentPage: 1,
+            searchTerm: ''
         }
     },
     computed: {
@@ -91,7 +94,8 @@ export default {
             return false
         },
         show: function () {
-            if ( window.location.pathname == '/') {
+            console.log('This is my lola',window.location.pathname)
+            if ( window.location.pathname === '/') {
                 return false
             }
             return true
@@ -101,6 +105,7 @@ export default {
         ...mapActions('userStore',[
             'doLogout'
         ]),
+        ...mapActions('searchStore',['makeSearch']),
         logout () {
             let data = {
                 token: this.$session.get('token') 
@@ -109,12 +114,26 @@ export default {
                 data
             })
             this.$session.destroy();
-            localStorage.setItem('isLoggedIn', false);
-            localStorage.setItem('token', '');
+            sessionStorage.setItem('isLoggedIn', false);
+            sessionStorage.setItem('token', '');
             this.$store.commit('userStore/setUserDetails', {
                 status : false
-            });  
+            })
+            this.$router.push('/')
         },
+        searchNews () {
+            let data = {
+                'category': "ALL",
+                'text': this.searchTerm
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+            this.$router.push({ path: 'newsfeeds', query: { category : 'search' }})
+        }
     }
 }
 </script>

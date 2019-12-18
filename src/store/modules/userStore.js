@@ -3,13 +3,21 @@ import MainApi from '../../api/api'
 export const state = {
     userDetails: {
         status : false
-    }
+    },
+    userSelfDetails: {},
+    isLoggedIn: false,
 }
 
 export const mutations = {
     setUserDetails(state, payload) {
 		state.userDetails = payload;
-	}
+	},
+    setUserSelfDetails(state, payload) {
+        state.userSelfDetails = payload
+    },
+    setIsLoggedIn (state, payload) {
+        state.isLoggedIn = payload
+    }
 }
 
 export const actions = {
@@ -44,20 +52,26 @@ export const actions = {
             fail && fail()
         },headers)
     },
-    fetchUserDetails ({commit}) {
-        MainApi.getUserDetails( (res) => {
-            commit('setUserDetails', res.body)
+    fetchUserDetails ({commit},{data, success, fail}) {
+        MainApi.getSelf( (res) => {
+            commit('setUserSelfDetails', res.body.responseObject)
             success && success(res)
         }, (res) => {
             fail && fail(res)
-        })
+        },data)
     }
 }
 
 export const getters = {
     isLoggedIn(state) {
 		return state.userDetails;
-	}
+	},
+    userSelfDetails(state) {
+        return state.userSelfDetails;
+    },
+    getisLoggedIn (state) {
+        state.isLoggedIn
+    }
 }
 
 export default {

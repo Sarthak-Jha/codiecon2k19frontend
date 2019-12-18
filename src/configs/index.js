@@ -1,64 +1,73 @@
 export default {
-    api: { 
+    api: {
         base_path: {
-            auth: '10.177.68.18:8079',
+            auth: '10.177.68.18',
             post: '10.177.68.18:8091/api/v1',
             solr: '10.177.68.18:8060/api/v1',
             base: '/api/v1',
         },
         users: {
-            login: '/auth/api/v1/login',
-            register: '/auth/api/v1/register',
-            logout: '/auth/api/v1/logout',
-            checkUsername: '/auth/api/v1/checkUsername',
-            session: '/auth/api/v1/session',
-            validate: '/auth/api/v1/validate'
+            login: ':8079/auth/api/v1/login',
+            register: ':8079/auth/api/v1/register',
+            logout: ':8079/auth/api/v1/logout',
+            checkUsername: ':8079/auth/api/v1/checkUsername',
+            session: ':8079/auth/api/v1/session',
+            validate: ':8079/auth/api/v1/validate'
         },
         posts: {
-            addPost: '/api/v1/addPost',
+            addPost: ':8091/post/api/v1/addPost',
             deletePost: function (postId) {
-                return '/api/v1/post' + postId
+                return ':8091/post/api/v1/post' + postId
             },
             addComment: function (postId) {
-                return `/api/v1/post/${postId}/addComment`
+                return `:8091/post/api/v1/post/${postId}/addComment`
             },
             closePost: function (postId) {
-                return `/api/v1/post/${postId}/closePost`
+                return `:8091/post/api/v1/post/${postId}/closePost`
             },
             getCommentsByPostId: function (postId) {
-                return `/api/v1/post/${postId}/getCommentsByPostId`
+                return `:8091/post/api/v1/post/${postId}/getComments`
             },
-            addLike: function (postId) {
-                return `/api/v1/post/${postId}/addLike`
+            addLike: function (data) {
+                return `:8091/post/api/v1/post/${data.postId}/like?forLike=` + data.forLike
             },
-            addGroup: '/api/v1/post/addGroup',
+            addGroup: ':8091/post/api/v1/post/addGroup',
             addMember: function (groupId) {
-                return '/api/v1/post/addMember/' + groupId
+                return ':8091/post/api/v1/post/addMember/' + groupId
             },
             addViewCount: function (postId) {
-                return '/api/v1/post/addViewCount/' + postId
+                return ':8091/post/api/v1/post/addViewCount/' + postId
             },
             deleteMember: function (groupId) {
-                return '/api/v1/post/deleteMember/' + groupId
+                return ':8091/post/api/v1/post/deleteMember/' + groupId
             },
-            getAllCategories: '/api/v1/post/getAllCategories',
-            getAllGroups: '/api/v1/post/getAllGroups',
-            getAllLocations: '/api/v1/post/getAllLocations',
-            getAllTags: '/api/v1/post/getAllTags',
+            getAllCategories: ':8091/post/api/v1/post/getAllCategories',
+            getAllGroups: ':8091/post/api/v1/post/getAllGroups',
+            getAllLocations: ':8091/post/api/v1/post/getAllLocations',
+            getAllTags: ':8091/post/api/v1/post/getAllTags',
+            getAllTypes: ':8091/post/api/v1/user/getAllType',
             getFormFeilds: function (category) {
-                return '/api/v1/post/getFormFeilds/' + category
+                return ':8091/post/api/v1/post/getFormFeilds/' + category
             },
-            getGroupsByUser: '/api/v1/post/getGroupsByUser',
-            setCategory: '/api/v1/post/setCategory',
-            setForm: '/api/v1/post/setForm',
-            getSelf: '/api/v1/user/getSelf',
+            getGroupsByUser: ':8091/post/api/v1/post/getGroupsByUser',
+            setCategory: ':8091/post/api/v1/post/setCategory',
+            setForm: ':8091/post/api/v1/post/setForm',
+            getSelf: ':8091/post/api/v1/user/getSelf',
             getUserDetails: function (userId) {
-                return '/api/v1/user/getUser' + userId
+                return ':8091/post/api/v1/user/getUser/' + userId
+            },
+            imageUpload(data) {
+                return ':8091/post/image/upload?fileType=' + data.fileType + '&type=' + data.type
+            },
+            getPost(data) {
+                return ':8091/post/api/v1/getPost/' + data.postId
             }
         },
         search: {
-            search: '/api/v1/search',
-            userAutoComplete: '/api/v1/userAutoComplete'
+            search: function (pageNumber){
+                return `:8060/search/api/v1/search?pageNumber=${pageNumber}&pageSize=6`
+            },
+            userAutoComplete: ':8060/search/api/v1/userAutoComplete?search=%20&totalSize=20'
         }
 
     },

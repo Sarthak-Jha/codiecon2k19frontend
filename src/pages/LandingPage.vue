@@ -2,13 +2,14 @@
     <main>
         <div class="parallax">
             <section class="welcome">
-                <input class="welcome__search" type="text" placeholder="What are you upto today?">
+                <input class="welcome__search" type="text" placeholder="What are you upto today?" v-model="searchTerm">
+                <v-btn class="welcome__button" @click="searchNews()">Search</v-btn>
             </section>
             <section class="paragraph">
-                Some of the Popular Categories to look into...
+                :))
                 <section class="cards">
-                    <div class="text-center"  v-for="tag in tags" :key="tag">
-                        <activitycard :category="tag" @categorychoosen="selectCategory">
+                    <div v-if="getAllCategories.length" class="text-center" v-for="category in categories" :key="category.categoryId">
+                        <activitycard :category="category" @clicked="selectedCategory">
                         </activitycard>
                     </div>
                 </section>
@@ -31,6 +32,7 @@
 <script>
 import timelineitem from '../components/TimelineItem'
 import activitycard from '../components/ActivityCard'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: "LandingPage",
@@ -40,13 +42,8 @@ export default {
     },
     data () {
         return {
-            tags: [
-                'all',
-                'tall',
-                'ball',
-                'call',
-                'zoll'
-            ],
+            currentPage: 1,
+            categories: [],
             timelinedata: [{
                 'index': 0,
                 'heading': 'Buy',
@@ -75,14 +72,66 @@ export default {
                 'index': 6,
                 'heading': 'And More to Come...',
                 'desc' : 'We promise to keep on addding more services on discussion board...',
-            }]
+            }],
+            searchTerm: ''
         }
     },
-    methods: {
-        selectCategory (name) {
-
+    watch: {
+        getAllCategories() {
+            this.categories = this.getAllCategories
         }
-    }
+    },
+    computed: {
+        ...mapGetters('postStore',[
+            'getAllCategories'
+        ]),
+    },
+    methods: {
+        ...mapActions('postStore',[
+            'allCategories',
+            'allLocations',
+            'allTags',
+            'fetchAllTypes'
+        ]),
+        ...mapActions('searchStore',['makeSearch']),
+        selectedCategory( value ) {
+            let data = {
+                'category' : value
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+        },
+        success () {
+            this.$router.push({ path: 'newsfeeds', query: { category : 'category' }})
+        },
+        fail () {
+
+        },
+        searchNews () {
+            let data = {
+                'category': "ALL",
+                'text': this.searchTerm
+            }
+            this.makeSearch({
+                data,
+                success: this.success,
+                fail: this.fail,
+                apiParam: this.currentPage
+            })
+            this.$router.push({ path: 'newsfeeds', query: { category : 'search' }})
+        }
+    },
+    mounted () {
+        this.allCategories({}),
+        this.allLocations({}),
+        this.allTags({}),
+        this.fetchAllTypes({}),
+        this.categories = this.getAllCategories
+    },
 }
 </script>
 
@@ -124,21 +173,25 @@ export default {
     &__search {
         position: relative;
         color: #777;
-        opacity: 0.6;
+        opacity: 0.9;
         background-color: #ffffff;
+        border-radius: 7px;
         filter: alpha(opacity=60);
-        border-radius: 30px;
         text-align:center;
         min-height: 50px;
         min-width: 550px;
         outline: none;
     }
+    &__button{
+        margin-left: 20px;
+        min-height: 50px;
+    }
 }
 .paragraph {
     color: #777;
-    opacity: 0.6;
+    opacity: 0.9;
     background-color: #ffffff;
-    filter: alpha(opacity=60);
+    filter: alpha(opacity=90);
     text-align:center;
     min-height: 300px;
     padding:50px 80px;

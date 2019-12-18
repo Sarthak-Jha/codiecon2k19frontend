@@ -4,8 +4,8 @@
             <v-subheader>My Groups</v-subheader>
 
             <v-expansion-panels popout>
-                <v-expansion-panel
-                        v-for="(message, i) in messages"
+                <v-expansion-panel v-if="getAllGroupsByUser.length"
+                        v-for="(AllGroupsByUser, i) in getAllGroupsByUser"
                         :key="i"
                         hide-actions
                 >
@@ -27,9 +27,9 @@
                                         size="40px"
                                 >
                                     <img
-                                            v-if="message.avatar"
+                                            v-if="AllGroupsByUser.groupImage"
                                             alt="Avatar"
-                                            src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                                            :src="getAllGroupsByUser.groupImage"
                                     >
                                     <img
                                             v-else
@@ -43,7 +43,7 @@
                                     sm="5"
                                     md="3"
                             >
-                                <strong v-html="message.name"></strong>
+                                <strong v-html="AllGroupsByUser.groupName"></strong>
                             </v-col>
                         </v-row>
                     </v-expansion-panel>
@@ -57,36 +57,27 @@
 </template>
 
 <script>
+    import {mapGetters, mapActions}  from 'vuex'
+
     export default {
         name: "GroupDetails",
         data: () => ({
-            messages: [
-                {
-                    avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
-                    name: 'John Leider',
-                    title: 'Welcome to Vuetify.js!',
-                    excerpt: 'Thank you for joining our community...',
-                },
-                {
-                    color: 'red',
-                    icon: 'people',
-                    name: 'Social',
-                    new: 1,
-                    total: 3,
-                    title: 'Twitter',
-                },
-                {
-                    color: 'teal',
-                    icon: 'local_offer',
-                    name: 'Promos',
-                    new: 2,
-                    total: 4,
-                    title: 'Shop your way',
-                    exceprt: 'New deals available, Join Today',
-                },
-            ],
             lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.',
         }),
+        computed: {
+            ...mapGetters('postStore',['getAllGroupsByUser'])
+        },
+        methods: {
+            ...mapActions('searchStore', ['fetchUserList'])
+        },
+        mounted () {
+            console.log('allah',this.getAllGroupsByUser)
+            let data = {
+                searchTerm: ''
+            }
+            this.fetchUserList({data})
+        }
+
     }
 </script>
 

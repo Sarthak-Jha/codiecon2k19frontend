@@ -81,12 +81,18 @@ const routes = [
   {
     path: '/createpost',
     name: 'CreatePost',
-    component: CreatePost
+    component: CreatePost,
+    meta      : {
+      authentication: 'required'
+    }
   },
   {
     path: '/postform',
     name: 'postForm',
-    component: PostForm
+    component: PostForm,
+    meta      : {
+      authentication: 'required'
+    }
   }
 ]
 
@@ -107,13 +113,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  let isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'))
+  let isLoggedIn = JSON.parse(sessionStorage.getItem('isLoggedIn'))
   if (authenticationCheck(to) && isLoggedIn) {
     // console.log(' @@ MY SESSION (IF)= ', isLoggedIn)
     next();
   } else if (authenticationCheck(to) && !isLoggedIn){
     // console.log(' @@ MY SESSION (ELSE IF)= ', isLoggedIn)
-    next({name: 'login'});
+    next('/login');
   } else {
     // console.log(' @@ MY SESSION (ELSE)= ', isLoggedIn)
     next()
