@@ -17,12 +17,12 @@
                 </v-list-item-content>
             </v-list-item>
 
-            <v-img v-if="image"
+            <!-- <v-img v-if="image"
             :src="postData.photoLinks[0]"
             height="194"
-            ></v-img>
+            ></v-img> -->
 
-            <v-img v-else
+            <v-img
             src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
             height="194"
             ></v-img>

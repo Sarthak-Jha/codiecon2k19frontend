@@ -24,7 +24,6 @@ export const actions = {
         }, apiParam)
     },
     fetchUserList ({commit}, {data, success, fail}) {
-        debugger
         MainApi.userList( (res) => {
             commit('setUserList', res.body.responseObject)
             success && success(res)

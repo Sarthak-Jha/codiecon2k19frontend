@@ -58,6 +58,14 @@ import { parse } from 'path'
                     fail: this.fail, 
                     apiParams: apiParam
                 })
+            } else {
+                let data = {
+                    Authorization: 'Bearer ' + this.$session.get('token')
+                }
+                this.fetchUserDetails({
+                    data
+                })
+
             } 
         },
         computed:{
@@ -73,6 +81,7 @@ import { parse } from 'path'
         },
         methods: {
             ...mapActions('postStore',['getUserById']),
+            ...mapActions('userStore',[ 'fetchUserDetails' ]),
             success () {
                 this.self = false
             },
